@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0066FF;
+  /* Brighter Cobalt Blue */
+  --color-secondary: #0F172A;
+  /* Slate 900 for cleaner dark mode */
+  --color-accent: #00D1FF;
+  /* Vibrant Cyan */
+
+  --background-image-glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+
+  --backdrop-blur-xs: 2px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #1E293B, #0F172A);
+  /* Dynamic radial background */
+  color: #F8FAFC;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism utility classes - Brighter & More Defined */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.08);
+  /* Increased opacity */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, #0066FF 0%, #00D1FF 100%);
+  /* Brighter, more vibrant gradient */
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #FFFFFF 0%, #7DD3FC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* New Highlight Animation */
+@keyframes glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
