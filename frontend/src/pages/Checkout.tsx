@@ -19,7 +19,12 @@ const Checkout = () => {
             alert('결제를 위해 로그인이 필요합니다.')
             navigate('/')
         } else {
-            setUser(JSON.parse(savedUser))
+            const parsedUser = JSON.parse(savedUser)
+            setUser(parsedUser)
+            if (parsedUser.role === 'admin') {
+                alert('관리자님은 결제 없이 모든 콘텐츠를 이용하실 수 있습니다. 자료실로 이동합니다.')
+                navigate('/archive')
+            }
         }
     }, [navigate])
 

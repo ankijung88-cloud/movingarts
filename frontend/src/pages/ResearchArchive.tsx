@@ -14,6 +14,7 @@ const ResearchArchive = () => {
     const checkAccess = async () => {
         try {
             const { data } = await authApi.getProfile()
+            // 관리자이거나 유효한 멤버십이 있는 경우
             if (data.user.role === 'admin' || data.membership) {
                 setIsSubscriber(true)
                 fetchContents()

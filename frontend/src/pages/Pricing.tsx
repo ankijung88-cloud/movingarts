@@ -1,10 +1,36 @@
-import { Check, Info, ShieldCheck, Zap, Users, Monitor } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Check, Info, ShieldCheck, Zap, Users, Monitor, LockOpen } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Pricing = () => {
+    const [user, setUser] = useState<any>(null)
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem('user')
+        if (savedUser) setUser(JSON.parse(savedUser))
+    }, [])
+
+    const isAdmin = user?.role === 'admin'
+
     return (
         <div className="pt-40 pb-32">
             <div className="container mx-auto px-6">
+                {isAdmin && (
+                    <div className="mb-16 p-8 rounded-[30px] bg-primary/10 border border-primary/20 flex flex-col md:flex-row items-center justify-between gap-6 glass-effect">
+                        <div className="flex items-center gap-6">
+                            <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center shrink-0">
+                                <LockOpen size={32} className="text-primary" />
+                            </div>
+                            <div>
+                                <h2 className="text-2xl font-bold mb-1">관리자 프리 패스 활성화됨</h2>
+                                <p className="text-white/50 text-sm italic">관리자님은 모든 유료 콘텐츠를 제한 없이 열람할 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <Link to="/archive" className="px-10 py-4 premium-gradient rounded-full font-bold shadow-lg shadow-primary/30 hover:scale-105 transition-all">
+                            자료실 바로가기
+                        </Link>
+                    </div>
+                )}
                 <div className="text-center mb-24">
                     <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-6">MEMBERSHIP PLANS</div>
                     <h1 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter">이해의 깊이를 더하다: <br /><span className="text-primary italic">멤버십 혜택</span></h1>

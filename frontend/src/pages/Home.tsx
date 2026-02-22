@@ -1,7 +1,18 @@
+import { useState, useEffect } from 'react'
 import { ArrowRight, Play, BookOpen, Shield, FlaskConical } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
+    const [user, setUser] = useState<any>(null)
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem('user')
+        if (savedUser) {
+            setUser(JSON.parse(savedUser))
+        }
+    }, [])
+
+    const archiveLink = user?.role === 'admin' ? '/archive' : '/subscription'
     return (
         <div className="pt-20">
             {/* Hero Section */}
@@ -25,7 +36,7 @@ const Home = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-6">
-                        <Link to="/subscription" className="px-10 py-5 premium-gradient rounded-full font-bold text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-all flex items-center gap-3">
+                        <Link to={archiveLink} className="px-10 py-5 premium-gradient rounded-full font-bold text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-all flex items-center gap-3">
                             연구 자료실 접속하기 <ArrowRight size={20} />
                         </Link>
                         <a href="#philosophy" className="px-10 py-5 glass-effect rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-3">
@@ -54,7 +65,7 @@ const Home = () => {
                             </div>
                             <h3 className="text-2xl font-bold mb-6">운동 사슬 (Kinetic Chains)</h3>
                             <p className="text-white/50 leading-relaxed mb-10">척추 분절의 유기적 조절과 신체적 움직임을 통해 각 관절의 상호 협조성을 극대화합니다.</p>
-                            <Link to="/subscription" className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
+                            <Link to={archiveLink} className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
                         </div>
 
                         <div className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all">
@@ -63,7 +74,7 @@ const Home = () => {
                             </div>
                             <h3 className="text-2xl font-bold mb-6">무게 중심 (Center of Gravity)</h3>
                             <p className="text-white/50 leading-relaxed mb-10">중력 균형의 유지 관점에서 신체적 상호작용 및 고유 감각을 최상의 상태로 정렬합니다.</p>
-                            <Link to="/subscription" className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
+                            <Link to={archiveLink} className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
                         </div>
 
                         <div className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all">
@@ -72,7 +83,7 @@ const Home = () => {
                             </div>
                             <h3 className="text-2xl font-bold mb-6">구조적 통합 (Structural Integrity)</h3>
                             <p className="text-white/50 leading-relaxed mb-10">습관적 정렬의 불균형을 해결하여 개개인이 가진 본연의 신체적 잠재력을 끌어올립니다.</p>
-                            <Link to="/subscription" className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
+                            <Link to={archiveLink} className="text-xs font-black tracking-widest uppercase flex items-center gap-2 group-hover:text-primary transition-colors">데이터 탐독 <ArrowRight size={14} /></Link>
                         </div>
                     </div>
                 </div>
@@ -91,8 +102,8 @@ const Home = () => {
                             분과 전문가 활동가, 생체학적 연구자들과 함께 하십시오. 실전 경험, 영상 자료, <br className="hidden md:block" />
                             그리고 전문 트레이닝 가이드를 모두 제공합니다.
                         </p>
-                        <Link to="/subscription" className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 mx-auto shadow-2xl shadow-primary/50">
-                            지금 가입하기 - 월 49,000원 <ArrowRight size={24} />
+                        <Link to={archiveLink} className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 mx-auto shadow-2xl shadow-primary/50">
+                            {user?.role === 'admin' ? '자료실 바로가기' : '지금 가입하기 - 월 49,000원'} <ArrowRight size={24} />
                         </Link>
                         <p className="text-white/30 text-xs mt-10 tracking-widest">언제든 해지 가능 | 7일 이내 환불 보장</p>
                     </div>
