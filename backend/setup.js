@@ -17,7 +17,11 @@ const setup = async () => {
         const [rows] = await connection.execute('SELECT id FROM users WHERE email = ?', [email]);
 
         if (rows.length > 0) {
-            console.log('Admin user already exists.');
+            await connection.execute(
+                'UPDATE users SET password = ?, role = "admin" WHERE email = ?',
+                [hashedPassword, email]
+            );
+            console.log('Admin password has been reset successfully!');
         } else {
             await connection.execute(
                 'INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, "admin")',
