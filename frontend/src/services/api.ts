@@ -18,6 +18,8 @@ export const authApi = {
     login: (data: any) => api.post('/users/login', data),
     register: (data: any) => api.post('/users/register', data),
     getProfile: () => api.get('/users/profile'),
+    findEmail: (data: any) => api.post('/users/find-email', data),
+    resetPasswordRequest: (data: any) => api.post('/users/reset-password-request', data),
 };
 
 export const paymentApi = {

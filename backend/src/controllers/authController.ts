@@ -85,3 +85,53 @@ export const getProfile = async (req: Request, res: Response) => {
         res.status(500).json({ message: '서버 오류가 발생했습니다.' });
     }
 };
+
+export const findEmail = async (req: Request, res: Response) => {
+    const { name, phone } = req.body;
+
+    try {
+        const [users] = await pool.query(
+            'SELECT email FROM users WHERE name = ? AND phone = ?',
+            [name, phone]
+        ) as any[];
+
+        if (users.length === 0) {
+            return res.status(404).json({ message: '해당 정보와 일치하는 사용자를 찾을 수 없습니다.' });
+        }
+
+        const email = users[0].email;
+        const [userPart, domainPart] = email.split('@');
+        const maskedUser = userPart.length > 3
+            ? userPart.substring(0, 3) + '*'.repeat(userPart.length - 3)
+            : userPart.substring(0, 1) + '*'.repeat(userPart.length - 1);
+
+        const maskedEmail = `${maskedUser}@${domainPart}`;
+
+        res.json({ email: maskedEmail });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+};
+
+export const resetPasswordRequest = async (req: Request, res: Response) => {
+    const { email, name } = req.body;
+
+    try {
+        const [users] = await pool.query(
+            'SELECT id FROM users WHERE email = ? AND name = ?',
+            [email, name]
+        ) as any[];
+
+        if (users.length === 0) {
+            return res.status(404).json({ message: '해당 정보와 일치하는 사용자를 찾을 수 없습니다.' });
+        }
+
+        // In a real app, you would send a reset link via email here.
+        // For now, we return success to allow the frontend to proceed or simulate the process.
+        res.json({ message: '계정 확인이 완료되었습니다. 비밀번호 재설정이 가능합니다.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+};
