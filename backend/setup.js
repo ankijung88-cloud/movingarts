@@ -1,4 +1,5 @@
 const mysql = require('mysql2/promise');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const setup = async () => {
@@ -11,8 +12,7 @@ const setup = async () => {
         });
 
         const email = 'admin@movingarts.org';
-        // This is the hash for 'admin_password_123!'
-        const hashedPassword = '$2a$10$7R6y0m5J0E.Lz9Y0f6.Y.u6y1u3o3m3i3n3g3a3r3t3s3_3p3a3s';
+        const hashedPassword = await bcrypt.hash('admin_password_123!', 10);
 
         const [rows] = await connection.execute('SELECT id FROM users WHERE email = ?', [email]);
 
