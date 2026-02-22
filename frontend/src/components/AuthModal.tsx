@@ -55,11 +55,13 @@ const AuthModal = ({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: (
                         )}
                         <input
                             type="email" placeholder="이메일" required
+                            autoComplete="email"
                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary"
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
                         <input
                             type="password" placeholder="비밀번호" required
+                            autoComplete={isLogin ? "current-password" : "new-password"}
                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary"
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
