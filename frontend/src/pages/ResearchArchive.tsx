@@ -21,7 +21,9 @@ const ResearchArchive = () => {
                 setIsSubscriber(false)
                 setLoading(false)
             }
-        } catch (err) {
+        } catch (err: any) {
+            console.error('Access check failed:', err)
+            alert('권한 확인 도중 에러가 발생했습니다: ' + (err.response?.data?.message || err.message))
             setIsSubscriber(false)
             setLoading(false)
         }
@@ -31,8 +33,9 @@ const ResearchArchive = () => {
         try {
             const { data } = await contentApi.getArchiveContents()
             setContents(data)
-        } catch (err) {
+        } catch (err: any) {
             console.error('Failed to fetch archive:', err)
+            alert('데이터를 가져오는 중 오류가 발생했습니다: ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }

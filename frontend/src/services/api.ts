@@ -36,8 +36,8 @@ export const adminApi = {
 };
 
 export const contentApi = {
-    getArchiveContents: () => api.get('/contents'),
-    getArchiveContentDetail: (id: number) => api.get(`/contents/${id}`),
+    getArchiveContents: () => api.get('/contents/'),
+    getArchiveContentDetail: (id: number) => api.get(`/contents/${id}/`),
 };
 
 export default api;
