@@ -33,20 +33,7 @@ const Home = () => {
                         </a>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-20 mt-32 border-t border-white/5 pt-16 w-full max-w-4xl">
-                        <div className="text-center">
-                            <div className="text-4xl font-black mb-2">1,200+</div>
-                            <div className="text-[10px] text-white/40 uppercase tracking-[0.2em]">연구 논문</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-4xl font-black mb-2">15+</div>
-                            <div className="text-[10px] text-white/40 uppercase tracking-[0.2em]">전속 연구진</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-4xl font-black mb-2">24/7</div>
-                            <div className="text-[10px] text-white/40 uppercase tracking-[0.2em]">실시간 기술지원</div>
-                        </div>
-                    </div>
+
                 </div>
             </section>
 
