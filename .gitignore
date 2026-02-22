@@ -8,7 +8,7 @@ frontend/node_modules/
 backend/.env
 
 # Build Output
-dist/
+# dist/
 build/
 frontend/dist/
 

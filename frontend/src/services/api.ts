@@ -35,4 +35,9 @@ export const adminApi = {
     deleteContent: (id: number) => api.delete(`/admin/contents/${id}`),
 };
 
+export const contentApi = {
+    getArchiveContents: () => api.get('/contents'),
+    getArchiveContentDetail: (id: number) => api.get(`/contents/${id}`),
+};
+
 export default api;

@@ -29,9 +29,9 @@ const Navigation = () => {
                     </Link>
 
                     <div className="hidden md:flex items-center gap-10 text-sm font-medium text-white/70">
-                        <Link to="/" className="hover:text-white transition-colors">연구 정보</Link>
-                        <a href="#philosophy" className="hover:text-white transition-colors">시술 분석</a>
-                        <Link to="/subscription" className="hover:text-white transition-colors">세미나</Link>
+                        <Link to="/archive" className="hover:text-white transition-colors">연구 자료실</Link>
+                        <Link to="/archive" className="hover:text-white transition-colors">시술 분석</Link>
+                        <Link to="/archive" className="hover:text-white transition-colors">세미나</Link>
                         <Link to="/" className="hover:text-white transition-colors">연구소 소개</Link>
                     </div>
 
