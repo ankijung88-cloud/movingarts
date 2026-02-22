@@ -36,7 +36,7 @@ const Home = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-6">
-                        <Link to={archiveLink} className="px-10 py-5 premium-gradient rounded-full font-bold text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-all flex items-center gap-3">
+                        <Link to="/archive" className="px-10 py-5 premium-gradient rounded-full font-bold text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-all flex items-center gap-3">
                             연구 자료실 접속하기 <ArrowRight size={20} />
                         </Link>
                         <a href="#philosophy" className="px-10 py-5 glass-effect rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-3">
