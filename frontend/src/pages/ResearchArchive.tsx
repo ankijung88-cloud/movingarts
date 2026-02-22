@@ -32,10 +32,15 @@ const ResearchArchive = () => {
     const fetchContents = async () => {
         try {
             const { data } = await contentApi.getArchiveContents()
-            setContents(data)
+            // API 응답 데이터가 배열인지 확인 후 설정
+            if (Array.isArray(data)) {
+                setContents(data)
+            } else {
+                console.warn('자료실 데이터 형식이 올바르지 않습니다:', data)
+                setContents([])
+            }
         } catch (err: any) {
             console.error('Failed to fetch archive:', err)
-            alert('데이터를 가져오는 중 오류가 발생했습니다: ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }
@@ -45,9 +50,10 @@ const ResearchArchive = () => {
         checkAccess()
     }, [])
 
+    const safeContents = Array.isArray(contents) ? contents : [];
     const filteredContents = category === 'ALL'
-        ? contents
-        : contents.filter(c => c.category === category)
+        ? safeContents
+        : safeContents.filter((c: any) => c.category === category)
 
     if (loading) {
         return (
