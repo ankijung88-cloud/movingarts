@@ -132,12 +132,12 @@ const ResearchArchive = () => {
                                 <p className="text-white/50 leading-relaxed mb-auto line-clamp-4 font-medium">
                                     {content.content}
                                 </p>
-                                <div className="mt-12 flex items-center justify-between group/btn">
+                                <Link to={`/contents/${content.id}`} className="mt-12 flex items-center justify-between group/btn">
                                     <span className="text-xs font-black tracking-widest uppercase text-white/30">Read Exploration</span>
                                     <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary transition-all">
                                         <ChevronRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         ))}
                     </div>

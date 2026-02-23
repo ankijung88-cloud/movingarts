@@ -7,6 +7,7 @@ import ResearchArchive from './pages/ResearchArchive'
 import ReferenceVideos from './pages/ReferenceVideos'
 import SeminarArchive from './pages/SeminarArchive'
 import AboutResearch from './pages/AboutResearch'
+import ContentDetailPage from './pages/ContentDetailPage'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/reference-videos" element={<ReferenceVideos />} />
                     <Route path="/seminars" element={<SeminarArchive />} />
                     <Route path="/about" element={<AboutResearch />} />
+                    <Route path="/contents/:id" element={<ContentDetailPage />} />
                     <Route path="/admin/*" element={<AdminDashboard />} />
                 </Routes>
             </main>
