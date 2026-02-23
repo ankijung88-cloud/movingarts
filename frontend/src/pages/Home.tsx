@@ -28,7 +28,7 @@ const Home = () => {
                     </div>
 
                     <h1 className="text-5xl md:text-8xl font-black mb-10 leading-[1.1] tracking-tighter">
-                        {t('단순한')} <span className="text-primary italic">{t('근육 기억')}</span>{t('을')} <br />
+                        {t('단순한')} <span className="text-primary italic">{t('근육 기억')}</span>{' '}{t('을')} <br />
                         {t('넘어서')}
                     </h1>
 
