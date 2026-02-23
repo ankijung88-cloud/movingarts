@@ -8,6 +8,8 @@ const ResearchArchive = () => {
     const [loading, setLoading] = useState(true)
     const [isSubscriber, setIsSubscriber] = useState<boolean | null>(null)
     const [category, setCategory] = useState('ALL')
+    const [currentPage, setCurrentPage] = useState(1)
+    const ITEMS_PER_PAGE = 9
 
     const categories = ['ALL', '연구정보', '참고 영상', '세미나']
 
@@ -51,10 +53,20 @@ const ResearchArchive = () => {
         checkAccess()
     }, [])
 
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [category])
+
     const safeContents = Array.isArray(contents) ? contents : [];
     const filteredContents = category === 'ALL'
         ? safeContents
         : safeContents.filter((c: any) => c.category === category)
+
+    const totalPages = Math.ceil(filteredContents.length / ITEMS_PER_PAGE)
+    const paginatedContents = filteredContents.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    )
 
     if (loading) {
         return (
@@ -115,32 +127,69 @@ const ResearchArchive = () => {
                         <p className="text-white/30 font-medium">해당 카테고리에 등록된 콘텐츠가 아직 없습니다.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {filteredContents.map((content) => (
-                            <div key={content.id} className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all flex flex-col h-full border border-white/5">
-                                <div className="flex justify-between items-center mb-8">
-                                    <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20">
-                                        {content.category}
-                                    </span>
-                                    <div className="text-[10px] text-white/30 font-bold tracking-widest uppercase">
-                                        {new Date(content.created_at).toLocaleDateString()}
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                            {paginatedContents.map((content) => (
+                                <div key={content.id} className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all flex flex-col h-full border border-white/5">
+                                    <div className="flex justify-between items-center mb-8">
+                                        <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20">
+                                            {content.category}
+                                        </span>
+                                        <div className="text-[10px] text-white/30 font-bold tracking-widest uppercase">
+                                            {new Date(content.created_at).toLocaleDateString()}
+                                        </div>
                                     </div>
+                                    <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors leading-tight line-clamp-2">
+                                        {content.title}
+                                    </h3>
+                                    <p className="text-white/50 leading-relaxed mb-auto line-clamp-4 font-medium">
+                                        {content.content}
+                                    </p>
+                                    <Link to={`/contents/${content.id}`} className="mt-12 flex items-center justify-between group/btn">
+                                        <span className="text-xs font-black tracking-widest uppercase text-white/30">Read Exploration</span>
+                                        <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary transition-all">
+                                            <ChevronRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                                        </div>
+                                    </Link>
                                 </div>
-                                <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors leading-tight line-clamp-2">
-                                    {content.title}
-                                </h3>
-                                <p className="text-white/50 leading-relaxed mb-auto line-clamp-4 font-medium">
-                                    {content.content}
-                                </p>
-                                <Link to={`/contents/${content.id}`} className="mt-12 flex items-center justify-between group/btn">
-                                    <span className="text-xs font-black tracking-widest uppercase text-white/30">Read Exploration</span>
-                                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary transition-all">
-                                        <ChevronRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
-                                    </div>
-                                </Link>
+                            ))}
+                        </div>
+
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center gap-4">
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                    disabled={currentPage === 1}
+                                    className="w-10 h-10 rounded-xl glass-effect flex items-center justify-center border border-white/5 text-white/40 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-all"
+                                >
+                                    <ChevronRight size={18} className="rotate-180" />
+                                </button>
+
+                                <div className="flex gap-2">
+                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                        <button
+                                            key={page}
+                                            onClick={() => setCurrentPage(page)}
+                                            className={`w-10 h-10 rounded-xl text-xs font-black transition-all ${currentPage === page
+                                                    ? 'premium-gradient text-white shadow-lg shadow-primary/20'
+                                                    : 'glass-effect border border-white/5 text-white/40 hover:text-white'
+                                                }`}
+                                        >
+                                            {page}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                    disabled={currentPage === totalPages}
+                                    className="w-10 h-10 rounded-xl glass-effect flex items-center justify-center border border-white/5 text-white/40 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-all"
+                                >
+                                    <ChevronRight size={18} />
+                                </button>
                             </div>
-                        ))}
-                    </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>
