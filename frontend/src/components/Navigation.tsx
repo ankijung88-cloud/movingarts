@@ -30,9 +30,9 @@ const Navigation = () => {
 
                     <div className="hidden md:flex items-center gap-10 text-sm font-medium text-white/70">
                         <Link to="/archive" className="hover:text-white transition-colors">연구 자료실</Link>
-                        <Link to="/archive" className="hover:text-white transition-colors">참고 영상</Link>
-                        <Link to="/archive" className="hover:text-white transition-colors">세미나</Link>
-                        <Link to="/" className="hover:text-white transition-colors">연구소 소개</Link>
+                        <Link to="/reference-videos" className="hover:text-white transition-colors">참고 영상</Link>
+                        <Link to="/seminars" className="hover:text-white transition-colors">세미나</Link>
+                        <Link to="/about" className="hover:text-white transition-colors">연구소 소개</Link>
                     </div>
 
                     <div className="flex items-center gap-6">
