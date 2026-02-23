@@ -4,6 +4,7 @@ import { Users, FileText, CreditCard, LayoutDashboard, ChevronRight } from 'luci
 import UserManagement from './admin/UserManagement'
 import MembershipManagement from './admin/MembershipManagement'
 import ContentManagement from './admin/ContentManagement'
+import AdminOverview from './admin/AdminOverview'
 
 const AdminDashboard = () => {
     const navigate = useNavigate()
@@ -63,7 +64,7 @@ const AdminDashboard = () => {
             {/* Main Content */}
             <main className="flex-grow p-12 overflow-y-auto">
                 <Routes>
-                    <Route path="/" element={<div className="text-3xl font-black tracking-tighter">관리자 대시보드 오버뷰</div>} />
+                    <Route path="/" element={<AdminOverview />} />
                     <Route path="/users" element={<UserManagement />} />
                     <Route path="/memberships" element={<MembershipManagement />} />
                     <Route path="/contents" element={<ContentManagement />} />
