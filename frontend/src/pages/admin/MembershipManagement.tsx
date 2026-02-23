@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { adminApi } from '../../services/api'
 import { CreditCard, Calendar, User, Zap } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
 const MembershipManagement = () => {
+    const { t } = useLanguage()
     const [memberships, setMemberships] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -24,8 +26,8 @@ const MembershipManagement = () => {
         <div className="container mx-auto">
             <div className="flex justify-between items-end mb-12">
                 <div>
-                    <h2 className="text-4xl font-black tracking-tighter mb-4">구독 및 결제 관리</h2>
-                    <p className="text-white/50 text-sm">멤버십 회원들의 결제 상태와 유효 기간을 실시간으로 확인합니다.</p>
+                    <h2 className="text-4xl font-black tracking-tighter mb-4">{t('구독 및 결제 관리')}</h2>
+                    <p className="text-white/50 text-sm">{t('멤버십 회원들의 결제 상태와 유효 기간을 실시간으로 확인합니다.')}</p>
                 </div>
             </div>
 
@@ -33,11 +35,11 @@ const MembershipManagement = () => {
                 <table className="w-full text-left">
                     <thead>
                         <tr className="border-b border-white/5 text-[10px] tracking-widest uppercase text-white/40">
-                            <th className="py-6 px-8">회원명</th>
-                            <th className="py-6 px-8">플랜 타입</th>
-                            <th className="py-6 px-8">상태</th>
-                            <th className="py-6 px-8">시작일</th>
-                            <th className="py-6 px-8">만료일</th>
+                            <th className="py-6 px-8">{t('회원명')}</th>
+                            <th className="py-6 px-8">{t('플랜 타입')}</th>
+                            <th className="py-6 px-8">{t('상태')}</th>
+                            <th className="py-6 px-8">{t('시작일')}</th>
+                            <th className="py-6 px-8">{t('만료일')}</th>
                         </tr>
                     </thead>
                     <tbody className="text-sm text-white/70">
@@ -59,9 +61,9 @@ const MembershipManagement = () => {
                         ))}
                     </tbody>
                 </table>
-                {loading && <div className="py-20 text-center text-white/30">결제 데이터를 검증하는 중...</div>}
+                {loading && <div className="py-20 text-center text-white/30">{t('결제 데이터를 검증하는 중...')}</div>}
                 {!loading && memberships.length === 0 && (
-                    <div className="py-20 text-center text-white/30 italic">현재 결제된 멤버십 정보가 없습니다.</div>
+                    <div className="py-20 text-center text-white/30 italic">{t('현재 결제된 멤버십 정보가 없습니다.')}</div>
                 )}
             </div>
         </div>

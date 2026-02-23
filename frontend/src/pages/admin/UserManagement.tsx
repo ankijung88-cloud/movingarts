@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { adminApi } from '../../services/api'
 import { User, Shield, Search } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
 const UserManagement = () => {
+    const { t } = useLanguage()
     const [users, setUsers] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -24,13 +26,13 @@ const UserManagement = () => {
         <div className="container mx-auto">
             <div className="flex justify-between items-end mb-12">
                 <div>
-                    <h2 className="text-4xl font-black tracking-tighter mb-4">회원 관리</h2>
-                    <p className="text-white/50 text-sm">전체 등록된 사용자 목록과 권한을 확인합니다.</p>
+                    <h2 className="text-4xl font-black tracking-tighter mb-4">{t('회원 관리')}</h2>
+                    <p className="text-white/50 text-sm">{t('전체 등록된 사용자 목록과 권한을 확인합니다.')}</p>
                 </div>
                 <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={18} />
                     <input
-                        type="text" placeholder="사용자 검색..."
+                        type="text" placeholder={t('사용자 검색...')}
                         className="bg-white/5 border border-white/10 rounded-2xl pl-12 pr-6 py-3 outline-none focus:border-primary text-sm min-w-[300px]"
                     />
                 </div>
@@ -40,11 +42,11 @@ const UserManagement = () => {
                 <table className="w-full text-left">
                     <thead>
                         <tr className="border-b border-white/5 text-[10px] tracking-widest uppercase text-white/40">
-                            <th className="py-6 px-8">이름</th>
-                            <th className="py-6 px-8">이메일</th>
-                            <th className="py-6 px-8">전화번호</th>
-                            <th className="py-6 px-8">권한</th>
-                            <th className="py-6 px-8">가입일</th>
+                            <th className="py-6 px-8">{t('이름')}</th>
+                            <th className="py-6 px-8">{t('이메일')}</th>
+                            <th className="py-6 px-8">{t('전화번호')}</th>
+                            <th className="py-6 px-8">{t('권한')}</th>
+                            <th className="py-6 px-8">{t('가입일')}</th>
                         </tr>
                     </thead>
                     <tbody className="text-sm text-white/70">
@@ -65,7 +67,7 @@ const UserManagement = () => {
                     </tbody>
                 </table>
                 {loading && (
-                    <div className="py-20 text-center text-white/30">강력한 신체 정보를 불러오는 중...</div>
+                    <div className="py-20 text-center text-white/30">{t('강력한 신체 정보를 불러오는 중...')}</div>
                 )}
             </div>
         </div>

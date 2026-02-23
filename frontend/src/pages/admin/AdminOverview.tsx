@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { adminApi } from '../../services/api'
 import { Users, FileText, CreditCard, ArrowRight, UserPlus, Clock, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
 
 const AdminOverview = () => {
+    const { t } = useLanguage()
     const [stats, setStats] = useState({
         totalUsers: 0,
         activeMemberships: 0,
@@ -47,7 +49,7 @@ const AdminOverview = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-full">
-                <div className="text-white/20 font-black animate-pulse tracking-widest uppercase">Initializing Dashboard...</div>
+                <div className="text-white/20 font-black animate-pulse tracking-widest uppercase">{t('Initializing Dashboard...')}</div>
             </div>
         )
     }
@@ -56,8 +58,8 @@ const AdminOverview = () => {
         <div className="space-y-12">
             <div className="flex justify-between items-end">
                 <div>
-                    <h1 className="text-4xl font-black tracking-tighter mb-2">대시보드 오버뷰</h1>
-                    <p className="text-white/40 text-sm font-medium">실시간 서비스 현황 및 주요 지표를 확인하세요.</p>
+                    <h1 className="text-4xl font-black tracking-tighter mb-2">{t('대시보드 오버뷰')}</h1>
+                    <p className="text-white/40 text-sm font-medium">{t('실시간 서비스 현황 및 주요 지표를 확인하세요.')}</p>
                 </div>
             </div>
 
@@ -70,7 +72,7 @@ const AdminOverview = () => {
                             <Users size={24} className="text-primary" />
                         </div>
                         <div>
-                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">전체 회원</div>
+                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">{t('전체 회원')}</div>
                             <div className="text-3xl font-black">{stats.totalUsers.toLocaleString()}</div>
                         </div>
                     </div>
@@ -83,7 +85,7 @@ const AdminOverview = () => {
                             <CreditCard size={24} className="text-emerald-500" />
                         </div>
                         <div>
-                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">활성 구독자</div>
+                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">{t('활성 구독자')}</div>
                             <div className="text-3xl font-black">{stats.activeMemberships.toLocaleString()}</div>
                         </div>
                     </div>
@@ -96,7 +98,7 @@ const AdminOverview = () => {
                             <FileText size={24} className="text-blue-500" />
                         </div>
                         <div>
-                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">총 콘텐츠</div>
+                            <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-1">{t('총 콘텐츠')}</div>
                             <div className="text-3xl font-black">{stats.totalContents.toLocaleString()}</div>
                         </div>
                     </div>
@@ -109,7 +111,7 @@ const AdminOverview = () => {
                     <div className="flex justify-between items-center mb-8">
                         <h3 className="text-lg font-bold flex items-center gap-3">
                             <UserPlus size={18} className="text-primary" />
-                            최근 가입 회원
+                            {t('최근 가입 회원')}
                         </h3>
                         <Link to="/admin/users" className="text-[10px] font-black tracking-widest uppercase text-white/20 hover:text-primary transition-colors flex items-center gap-2 group">
                             Full List <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -140,7 +142,7 @@ const AdminOverview = () => {
                     <div className="flex justify-between items-center mb-8">
                         <h3 className="text-lg font-bold flex items-center gap-3">
                             <Clock size={18} className="text-primary" />
-                            최근 등록 콘텐츠
+                            {t('최근 등록 콘텐츠')}
                         </h3>
                         <Link to="/admin/contents" className="text-[10px] font-black tracking-widest uppercase text-white/20 hover:text-primary transition-colors flex items-center gap-2 group">
                             Management <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -150,9 +152,9 @@ const AdminOverview = () => {
                         {recentContents.map((c: any) => (
                             <div key={c.id} className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors">
                                 <div className="flex flex-col gap-1 min-w-0">
-                                    <div className="text-sm font-bold truncate pr-4">{c.title}</div>
+                                    <div className="text-sm font-bold truncate pr-4">{t(c.title)}</div>
                                     <div className="flex items-center gap-3">
-                                        <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">{c.category}</span>
+                                        <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">{t(c.category)}</span>
                                         <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest">
                                             {new Date(c.created_at).toLocaleDateString()}
                                         </span>

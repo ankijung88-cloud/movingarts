@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { contentApi, authApi } from '../services/api'
 import { ArrowLeft, Clock, Tag, Share2, Printer } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const ContentDetailPage = () => {
+    const { t } = useLanguage()
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
     const [content, setContent] = useState<any>(null)
@@ -49,7 +51,7 @@ const ContentDetailPage = () => {
     if (loading) {
         return (
             <div className="pt-40 pb-20 min-h-screen flex items-center justify-center">
-                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">Deciphering Research Data...</div>
+                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">{t('Deciphering Research Data...')}</div>
             </div>
         )
     }
@@ -58,9 +60,9 @@ const ContentDetailPage = () => {
         return (
             <div className="pt-40 pb-20 min-h-screen container mx-auto px-6">
                 <div className="glass-effect p-20 rounded-[40px] text-center">
-                    <h2 className="text-3xl font-black mb-6">접근 권한이 없습니다</h2>
-                    <p className="text-white/50 mb-10">이 콘텐츠를 보려면 멤버십 구독이 필요합니다.</p>
-                    <button onClick={() => navigate('/subscription')} className="px-10 py-4 premium-gradient rounded-full font-bold">멤버십 가입하기</button>
+                    <h2 className="text-3xl font-black mb-6">{t('접근 권한이 없습니다')}</h2>
+                    <p className="text-white/50 mb-10">{t('이 콘텐츠를 보려면 멤버십 구독이 필요합니다.')}</p>
+                    <button onClick={() => navigate('/subscription')} className="px-10 py-4 premium-gradient rounded-full font-bold">{t('멤버십 가입하기')}</button>
                 </div>
             </div>
         )
@@ -69,8 +71,8 @@ const ContentDetailPage = () => {
     if (!content) {
         return (
             <div className="pt-40 pb-20 min-h-screen container mx-auto px-6 text-center">
-                <p className="text-white/30">콘텐츠를 찾을 수 없습니다.</p>
-                <button onClick={() => navigate(-1)} className="mt-6 text-primary font-bold">뒤로 가기</button>
+                <p className="text-white/30">{t('콘텐츠를 찾을 수 없습니다.')}</p>
+                <button onClick={() => navigate(-1)} className="mt-6 text-primary font-bold">{t('뒤로 가기')}</button>
             </div>
         )
     }
@@ -83,7 +85,7 @@ const ContentDetailPage = () => {
                     className="flex items-center gap-2 text-white/40 hover:text-white transition-colors mb-12 group"
                 >
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm font-bold uppercase tracking-widest">Back to Library</span>
+                    <span className="text-sm font-bold uppercase tracking-widest">{t('Back to Library')}</span>
                 </button>
 
                 <div className="glass-effect p-12 md:p-20 rounded-[60px] border border-white/5 relative overflow-hidden">
@@ -92,7 +94,7 @@ const ContentDetailPage = () => {
                     <div className="flex flex-wrap items-center gap-6 mb-10">
                         <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20 flex items-center gap-2">
                             <Tag size={12} />
-                            {content.category}
+                            {t(content.category)}
                         </span>
                         <div className="flex items-center gap-2 text-[10px] text-white/30 font-bold tracking-widest uppercase">
                             <Clock size={12} />
@@ -101,12 +103,12 @@ const ContentDetailPage = () => {
                     </div>
 
                     <h1 className="text-4xl md:text-6xl font-black mb-16 tracking-tighter leading-tight">
-                        {content.title}
+                        {t(content.title)}
                     </h1>
 
                     <div className="prose prose-invert max-w-none">
                         <p className="text-white/70 text-lg md:text-xl leading-[1.8] font-medium whitespace-pre-wrap font-medium">
-                            {content.content}
+                            {t(content.content)}
                         </p>
                     </div>
 
@@ -115,14 +117,14 @@ const ContentDetailPage = () => {
                             <button
                                 onClick={handleShare}
                                 className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110 active:scale-95"
-                                title="링크 복사하기"
+                                title={t('링크 복사하기')}
                             >
                                 <Share2 size={20} />
                             </button>
                             <button
                                 onClick={handlePrint}
                                 className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110 active:scale-95"
-                                title="출력하기"
+                                title={t('출력하기')}
                             >
                                 <Printer size={20} />
                             </button>

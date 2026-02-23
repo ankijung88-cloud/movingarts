@@ -1,20 +1,22 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const AboutResearch = () => {
+    const { t } = useLanguage()
     return (
         <div className="pt-40 pb-20 min-h-screen">
             <div className="container mx-auto px-6">
                 {/* Introduction Section */}
                 <div className="mb-32">
-                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">About Us</div>
-                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12">연구소 소개</h1>
+                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">{t('About Us')}</div>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12">{t('연구소 소개')}</h1>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
                         <div className="space-y-8">
-                            <h2 className="text-3xl font-bold tracking-tight text-white/90">신체 구조 움직임 연구소는<br />최상의 움직임을 향한 깊이 있는 통찰을 제공합니다.</h2>
+                            <h2 className="text-3xl font-bold tracking-tight text-white/90">{t('신체 구조 움직임 연구소는')}<br />{t('최상의 움직임을 향한 깊이 있는 통찰을 제공합니다.')}</h2>
                             <p className="text-white/60 text-lg leading-relaxed font-medium">
-                                우리는 인체의 복잡한 구조와 동력 과학을 연구하여, 효율적이고 통증 없는 움직임을 실현하기 위한 학술적 기반을 마련합니다.
-                                전문적인 시술 분석과 연구 데이터를 통해 전문가와 일반인 모두가 신체의 가능성을 극대화할 수 있도록 돕고 있습니다.
+                                {t('우리는 인체의 복잡한 구조와 동력 과학을 연구하여, 효율적이고 통증 없는 움직임을 실현하기 위한 학술적 기반을 마련합니다.')}
+                                {t('전문적인 시술 분석과 연구 데이터를 통해 전문가와 일반인 모두가 신체의 가능성을 극대화할 수 있도록 돕고 있습니다.')}
                             </p>
                             <div className="p-8 rounded-[40px] glass-effect border border-white/5">
                                 <div className="grid grid-cols-2 gap-8">
@@ -50,8 +52,8 @@ const AboutResearch = () => {
 
                 {/* Map/Directions Section */}
                 <div>
-                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">Location</div>
-                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-12">오시는 길</h2>
+                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">{t('Location')}</div>
+                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-12">{t('오시는 길')}</h2>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-2 relative h-[500px] rounded-[60px] overflow-hidden glass-effect border border-white/5">
@@ -74,8 +76,8 @@ const AboutResearch = () => {
                                     <MapPin size={20} className="text-primary" />
                                 </div>
                                 <div>
-                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">Address</div>
-                                    <p className="text-white/80 font-medium leading-relaxed font-medium">서울특별시 강남구 학동로 342 <br />SK허브 402호</p>
+                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">{t('Address')}</div>
+                                    <p className="text-white/80 font-medium leading-relaxed font-medium">{t('서울특별시 강남구 학동로 342')} <br />{t('SK허브 402호')}</p>
                                 </div>
                             </div>
 
@@ -84,7 +86,7 @@ const AboutResearch = () => {
                                     <Phone size={20} className="text-primary" />
                                 </div>
                                 <div>
-                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">Contact</div>
+                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">{t('Contact')}</div>
                                     <p className="text-white/80 font-medium font-medium">02-1234-5678</p>
                                 </div>
                             </div>
@@ -94,7 +96,7 @@ const AboutResearch = () => {
                                     <Mail size={20} className="text-primary" />
                                 </div>
                                 <div>
-                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">Email</div>
+                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">{t('Email')}</div>
                                     <p className="text-white/80 font-medium font-medium">info@movingarts.com</p>
                                 </div>
                             </div>
@@ -104,8 +106,8 @@ const AboutResearch = () => {
                                     <Clock size={20} className="text-primary" />
                                 </div>
                                 <div>
-                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">Hours</div>
-                                    <p className="text-white/80 font-medium font-medium">평일 09:00 - 18:00 <br />토요일 09:00 - 13:00</p>
+                                    <div className="text-xs font-black tracking-widest uppercase text-white/30 mb-1">{t('Hours')}</div>
+                                    <p className="text-white/80 font-medium font-medium">{t('평일 09:00 - 18:00')} <br />{t('토요일 09:00 - 13:00')}</p>
                                 </div>
                             </div>
                         </div>

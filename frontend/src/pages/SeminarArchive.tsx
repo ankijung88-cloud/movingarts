@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { contentApi, authApi } from '../services/api'
 import { BookOpen, Lock, ArrowRight, ChevronRight, Calendar } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const SeminarArchive = () => {
+    const { t } = useLanguage()
     const [contents, setContents] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [isSubscriber, setIsSubscriber] = useState<boolean | null>(null)
@@ -58,7 +60,7 @@ const SeminarArchive = () => {
     if (loading) {
         return (
             <div className="pt-40 pb-20 min-h-screen flex items-center justify-center">
-                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">Preparing Seminar Data...</div>
+                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">{t('Preparing Seminar Data...')}</div>
             </div>
         )
     }
@@ -71,13 +73,13 @@ const SeminarArchive = () => {
                     <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mb-12 border border-primary/30">
                         <Lock size={40} className="text-primary" />
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter">프리미엄 세미나 자료</h2>
+                    <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter">{t('프리미엄 세미나 자료')}</h2>
                     <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-16 font-medium">
-                        이 세미나 아카이브는 멤버십 전용입니다. <br />
-                        과거 진행된 모든 웹 세미나와 핵심 요약 자료를 확인하세요.
+                        {t('이 세미나 아카이브는 멤버십 전용입니다.')} <br />
+                        {t('과거 진행된 모든 웹 세미나와 핵심 요약 자료를 확인하세요.')}
                     </p>
                     <Link to="/subscription" className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 shadow-2xl shadow-primary/50">
-                        멤버십 가입하기 <ArrowRight size={24} />
+                        {t('멤버십 가입하기')} <ArrowRight size={24} />
                     </Link>
                 </div>
             </div>
@@ -88,15 +90,15 @@ const SeminarArchive = () => {
         <div className="pt-40 pb-20 min-h-screen">
             <div className="container mx-auto px-6">
                 <div className="mb-20">
-                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">Academy Archive</div>
-                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">세미나</h1>
-                    <p className="text-white/50 text-lg font-medium">정기적으로 개최되는 온/오프라인 세미나의 기록을 보관합니다.</p>
+                    <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">{t('Academy Archive')}</div>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">{t('세미나')}</h1>
+                    <p className="text-white/50 text-lg font-medium">{t('정기적으로 개최되는 온/오프라인 세미나의 기록을 보관합니다.')}</p>
                 </div>
 
                 {contents.length === 0 ? (
                     <div className="py-40 text-center glass-effect rounded-[40px] border border-dashed border-white/10">
                         <Calendar className="mx-auto text-white/10 mb-6" size={64} />
-                        <p className="text-white/30 font-medium">등록된 세미나 자료가 아직 없습니다.</p>
+                        <p className="text-white/30 font-medium">{t('등록된 세미나 자료가 아직 없습니다.')}</p>
                     </div>
                 ) : (
                     <>
@@ -105,7 +107,7 @@ const SeminarArchive = () => {
                                 <div key={content.id} className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all flex flex-col h-full border border-white/5">
                                     <div className="flex justify-between items-center mb-8">
                                         <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20">
-                                            세미나
+                                            {t('세미나')}
                                         </span>
                                         <div className="text-[10px] text-white/30 font-bold tracking-widest uppercase">
                                             {new Date(content.created_at).toLocaleDateString()}
@@ -118,7 +120,7 @@ const SeminarArchive = () => {
                                         {content.content}
                                     </p>
                                     <Link to={`/contents/${content.id}`} className="mt-12 flex items-center justify-between group/btn">
-                                        <span className="text-xs font-black tracking-widest uppercase text-white/30">Watch Seminar</span>
+                                        <span className="text-xs font-black tracking-widest uppercase text-white/30">{t('Watch Seminar')}</span>
                                         <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary transition-all">
                                             <ChevronRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
                                         </div>

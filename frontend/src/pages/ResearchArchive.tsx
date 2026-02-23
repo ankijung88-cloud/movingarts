@@ -33,7 +33,7 @@ const ResearchArchive = () => {
             }
         } catch (err: any) {
             console.error('Access check failed:', err)
-            alert('권한 확인 도중 에러가 발생했습니다: ' + (err.response?.data?.message || err.message))
+            alert(t('권한 확인 도중 에러가 발생했습니다:') + ' ' + (err.response?.data?.message || err.message))
             setIsSubscriber(false)
             setLoading(false)
         }
@@ -51,7 +51,7 @@ const ResearchArchive = () => {
             }
         } catch (err: any) {
             console.error('Failed to fetch archive:', err)
-            alert('데이터를 불러오는데 실패했습니다: ' + (err.response?.data?.message || err.message))
+            alert(t('데이터를 불러오는데 실패했습니다:') + ' ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }
@@ -79,7 +79,7 @@ const ResearchArchive = () => {
     if (loading) {
         return (
             <div className="pt-40 pb-20 min-h-screen flex items-center justify-center">
-                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">Syncing Premium Data...</div>
+                <div className="text-white/30 font-black animate-pulse tracking-widest uppercase">{t('Syncing Premium Data...')}</div>
             </div>
         )
     }
@@ -92,13 +92,13 @@ const ResearchArchive = () => {
                     <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mb-12 border border-primary/30">
                         <Lock size={40} className="text-primary" />
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter">프리미엄 전용 콘텐츠</h2>
+                    <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter">{t('프리미엄 전용 콘텐츠')}</h2>
                     <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-16 font-medium">
-                        이 학술 자료실은 유료 멤버십 회원에게만 공개됩니다. <br />
-                        인증된 연구 데이터와 참고 영상을 지금 바로 확인하세요.
+                        {t('이 학술 자료실은 유료 멤버십 회원에게만 공개됩니다.')} <br />
+                        {t('인증된 연구 데이터와 참고 영상을 지금 바로 확인하세요.')}
                     </p>
                     <Link to="/subscription" className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 shadow-2xl shadow-primary/50">
-                        멤버십 가입하기 <ArrowRight size={24} />
+                        {t('멤버십 가입하기')} <ArrowRight size={24} />
                     </Link>
                 </div>
             </div>
@@ -141,20 +141,20 @@ const ResearchArchive = () => {
                                 <div key={content.id} className="group glass-effect p-10 rounded-[40px] hover:border-primary/50 transition-all flex flex-col h-full border border-white/5">
                                     <div className="flex justify-between items-center mb-8">
                                         <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20">
-                                            {content.category}
+                                            {t(content.category)}
                                         </span>
                                         <div className="text-[10px] text-white/30 font-bold tracking-widest uppercase">
                                             {new Date(content.created_at).toLocaleDateString()}
                                         </div>
                                     </div>
                                     <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors leading-tight line-clamp-2">
-                                        {content.title}
+                                        {t(content.title)}
                                     </h3>
                                     <p className="text-white/50 leading-relaxed mb-auto line-clamp-4 font-medium">
-                                        {content.content}
+                                        {t(content.content)}
                                     </p>
                                     <Link to={`/contents/${content.id}`} className="mt-12 flex items-center justify-between group/btn">
-                                        <span className="text-xs font-black tracking-widest uppercase text-white/30">Read Exploration</span>
+                                        <span className="text-xs font-black tracking-widest uppercase text-white/30">{t('Read Exploration')}</span>
                                         <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary transition-all">
                                             <ChevronRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
                                         </div>

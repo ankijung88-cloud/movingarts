@@ -5,20 +5,22 @@ import UserManagement from './admin/UserManagement'
 import MembershipManagement from './admin/MembershipManagement'
 import ContentManagement from './admin/ContentManagement'
 import AdminOverview from './admin/AdminOverview'
+import { useLanguage } from '../context/LanguageContext'
 
 const AdminDashboard = () => {
+    const { t } = useLanguage()
     const navigate = useNavigate()
     const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
         const savedUser = localStorage.getItem('user')
         if (!savedUser || JSON.parse(savedUser).role !== 'admin') {
-            alert('관리자 권한이 필요합니다.')
+            alert(t('관리자 권한이 필요합니다.'))
             navigate('/')
         } else {
             setUser(JSON.parse(savedUser))
         }
-    }, [navigate])
+    }, [navigate, t])
 
     if (!user) return null
 
@@ -32,28 +34,28 @@ const AdminDashboard = () => {
                         <Link to="/admin" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors group">
                             <div className="flex items-center gap-4">
                                 <LayoutDashboard size={20} className="text-primary" />
-                                <span className="text-sm font-bold">오버뷰</span>
+                                <span className="text-sm font-bold">{t('오버뷰')}</span>
                             </div>
                             <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
                         <Link to="/admin/users" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors group">
                             <div className="flex items-center gap-4">
                                 <Users size={20} className="text-primary" />
-                                <span className="text-sm font-bold">회원 관리</span>
+                                <span className="text-sm font-bold">{t('회원 관리')}</span>
                             </div>
                             <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
                         <Link to="/admin/memberships" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors group">
                             <div className="flex items-center gap-4">
                                 <CreditCard size={20} className="text-primary" />
-                                <span className="text-sm font-bold">구독 관리</span>
+                                <span className="text-sm font-bold">{t('구독 관리')}</span>
                             </div>
                             <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
                         <Link to="/admin/contents" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors group">
                             <div className="flex items-center gap-4">
                                 <FileText size={20} className="text-primary" />
-                                <span className="text-sm font-bold">콘텐츠 관리</span>
+                                <span className="text-sm font-bold">{t('콘텐츠 관리')}</span>
                             </div>
                             <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
