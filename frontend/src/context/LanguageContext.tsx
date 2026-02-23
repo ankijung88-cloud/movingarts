@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import api from '../services/api';
 
 type Language = 'kr' | 'en';
@@ -11,7 +11,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Cache for API translations
+// Cache for API translations (Persistent for the session)
 const apiCache: { [key: string]: string } = {};
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -21,6 +21,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
 
     const [translations, setTranslations] = useState<{ [key: string]: string }>({});
+    const pendingRequests = useRef<Set<string>>(new Set());
 
     const setLanguage = (lang: Language) => {
         setLanguageState(lang);
@@ -28,33 +29,45 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
 
     const translate = useCallback(async (text: string, target: Language) => {
-        if (target === 'kr') return text;
+        if (target === 'kr' || !text) return;
 
         const cacheKey = `${text}_${target}`;
-        if (apiCache[cacheKey]) return apiCache[cacheKey];
+        if (apiCache[cacheKey] || pendingRequests.current.has(cacheKey)) return;
+
+        pendingRequests.current.add(cacheKey);
 
         try {
+            console.log(`Translating: "${text}" to ${target}`);
             const { data } = await api.post('/translate', { text, target });
-            apiCache[cacheKey] = data.translatedText;
-            setTranslations(prev => ({ ...prev, [cacheKey]: data.translatedText }));
-            return data.translatedText;
-        } catch (err) {
-            console.error('Translation failed', err);
-            return text;
+
+            if (data.translatedText) {
+                apiCache[cacheKey] = data.translatedText;
+                setTranslations(prev => ({ ...prev, [cacheKey]: data.translatedText }));
+            }
+        } catch (err: any) {
+            console.error(`Translation failed for: "${text}"`, err.response?.data || err.message);
+        } finally {
+            pendingRequests.current.delete(cacheKey);
         }
     }, []);
 
     const t = (text: string) => {
-        if (language === 'kr') return text;
+        if (language === 'kr' || !text) return text;
 
         const cacheKey = `${text}_${language}`;
+
+        // Return from state if available
         if (translations[cacheKey]) return translations[cacheKey];
+
+        // Return from static cache if available
         if (apiCache[cacheKey]) return apiCache[cacheKey];
 
-        // Trigger async translation if not in state/cache
-        translate(text, language);
+        // Trigger translation if not already pending
+        if (!pendingRequests.current.has(cacheKey)) {
+            translate(text, language);
+        }
 
-        return text; // Return original while loading
+        return text; // Return original while translating
     };
 
     return (
