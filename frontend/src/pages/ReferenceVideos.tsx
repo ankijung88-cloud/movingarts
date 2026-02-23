@@ -31,14 +31,15 @@ const ReferenceVideos = () => {
         try {
             const { data } = await contentApi.getArchiveContents()
             if (Array.isArray(data)) {
-                // '참고 영상' 카테고리만 필터링
-                const filtered = data.filter((c: any) => c.category === '참고 영상')
+                // '참고 영상' 카테고리만 필터링 (공백 resilience 추가)
+                const filtered = data.filter((c: any) => c.category?.trim() === '참고 영상' || c.category?.trim() === '시술분석')
                 setContents(filtered)
             } else {
                 setContents([])
             }
         } catch (err: any) {
             console.error('Failed to fetch reference videos:', err)
+            alert('영상을 불러오는데 실패했습니다: ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }
@@ -142,8 +143,8 @@ const ReferenceVideos = () => {
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`w-10 h-10 rounded-xl text-xs font-black transition-all ${currentPage === page
-                                                    ? 'premium-gradient text-white shadow-lg shadow-primary/20'
-                                                    : 'glass-effect border border-white/5 text-white/40 hover:text-white'
+                                                ? 'premium-gradient text-white shadow-lg shadow-primary/20'
+                                                : 'glass-effect border border-white/5 text-white/40 hover:text-white'
                                                 }`}
                                         >
                                             {page}

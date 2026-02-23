@@ -44,6 +44,7 @@ const ResearchArchive = () => {
             }
         } catch (err: any) {
             console.error('Failed to fetch archive:', err)
+            alert('데이터를 불러오는데 실패했습니다: ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }
@@ -60,7 +61,7 @@ const ResearchArchive = () => {
     const safeContents = Array.isArray(contents) ? contents : [];
     const filteredContents = category === 'ALL'
         ? safeContents
-        : safeContents.filter((c: any) => c.category === category)
+        : safeContents.filter((c: any) => c.category?.trim() === category.trim())
 
     const totalPages = Math.ceil(filteredContents.length / ITEMS_PER_PAGE)
     const paginatedContents = filteredContents.slice(
@@ -171,8 +172,8 @@ const ResearchArchive = () => {
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`w-10 h-10 rounded-xl text-xs font-black transition-all ${currentPage === page
-                                                    ? 'premium-gradient text-white shadow-lg shadow-primary/20'
-                                                    : 'glass-effect border border-white/5 text-white/40 hover:text-white'
+                                                ? 'premium-gradient text-white shadow-lg shadow-primary/20'
+                                                : 'glass-effect border border-white/5 text-white/40 hover:text-white'
                                                 }`}
                                         >
                                             {page}

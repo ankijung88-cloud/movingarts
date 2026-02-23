@@ -32,13 +32,14 @@ const SeminarArchive = () => {
             const { data } = await contentApi.getArchiveContents()
             if (Array.isArray(data)) {
                 // '세미나' 카테고리만 필터링
-                const filtered = data.filter((c: any) => c.category === '세미나')
+                const filtered = data.filter((c: any) => c.category?.trim() === '세미나')
                 setContents(filtered)
             } else {
                 setContents([])
             }
         } catch (err: any) {
             console.error('Failed to fetch seminars:', err)
+            alert('세미나를 불러오는데 실패했습니다: ' + (err.response?.data?.message || err.message))
         } finally {
             setLoading(false)
         }
@@ -142,8 +143,8 @@ const SeminarArchive = () => {
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`w-10 h-10 rounded-xl text-xs font-black transition-all ${currentPage === page
-                                                    ? 'premium-gradient text-white shadow-lg shadow-primary/20'
-                                                    : 'glass-effect border border-white/5 text-white/40 hover:text-white'
+                                                ? 'premium-gradient text-white shadow-lg shadow-primary/20'
+                                                : 'glass-effect border border-white/5 text-white/40 hover:text-white'
                                                 }`}
                                         >
                                             {page}
