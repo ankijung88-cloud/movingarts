@@ -9,7 +9,7 @@ const ResearchArchive = () => {
     const [isSubscriber, setIsSubscriber] = useState<boolean | null>(null)
     const [category, setCategory] = useState('ALL')
 
-    const categories = ['ALL', '연구정보', '시술분석', '세미나']
+    const categories = ['ALL', '연구정보', '참고 영상', '세미나']
 
     const checkAccess = async () => {
         try {
@@ -75,7 +75,7 @@ const ResearchArchive = () => {
                     <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter">프리미엄 전용 콘텐츠</h2>
                     <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-16 font-medium">
                         이 학술 자료실은 유료 멤버십 회원에게만 공개됩니다. <br />
-                        인증된 연구 데이터와 시술 분석 영상을 지금 바로 확인하세요.
+                        인증된 연구 데이터와 참고 영상을 지금 바로 확인하세요.
                     </p>
                     <Link to="/subscription" className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 shadow-2xl shadow-primary/50">
                         멤버십 가입하기 <ArrowRight size={24} />
@@ -92,7 +92,7 @@ const ResearchArchive = () => {
                     <div>
                         <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">Subscriber Only</div>
                         <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">연구 자료실</h1>
-                        <p className="text-white/50 text-lg font-medium">최신 동력 과학 연구 데이터와 전문 시술 분석을 탐독하십시오.</p>
+                        <p className="text-white/50 text-lg font-medium">최신 동력 과학 연구 데이터와 전문 참고 영상을 탐독하십시오.</p>
                     </div>
 
                     <div className="flex gap-2 p-1.5 glass-effect rounded-2xl border border-white/5">
