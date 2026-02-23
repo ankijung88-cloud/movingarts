@@ -10,6 +10,8 @@ const ContentDetailPage = () => {
     const [loading, setLoading] = useState(true)
     const [isSubscriber, setIsSubscriber] = useState<boolean | null>(null)
 
+    const [showShareToast, setShowShareToast] = useState(false)
+
     useEffect(() => {
         const checkAccessAndFetchDetail = async () => {
             try {
@@ -33,6 +35,16 @@ const ContentDetailPage = () => {
 
         checkAccessAndFetchDetail()
     }, [id])
+
+    const handleShare = () => {
+        navigator.clipboard.writeText(window.location.href)
+        setShowShareToast(true)
+        setTimeout(() => setShowShareToast(false), 2000)
+    }
+
+    const handlePrint = () => {
+        window.print()
+    }
 
     if (loading) {
         return (
@@ -93,19 +105,33 @@ const ContentDetailPage = () => {
                     </h1>
 
                     <div className="prose prose-invert max-w-none">
-                        <p className="text-white/70 text-lg md:text-xl leading-[1.8] font-medium whitespace-pre-wrap">
+                        <p className="text-white/70 text-lg md:text-xl leading-[1.8] font-medium whitespace-pre-wrap font-medium">
                             {content.content}
                         </p>
                     </div>
 
                     <div className="mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-between items-center gap-8">
-                        <div className="flex gap-4">
-                            <button className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110">
+                        <div className="flex gap-4 relative">
+                            <button
+                                onClick={handleShare}
+                                className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110 active:scale-95"
+                                title="링크 복사하기"
+                            >
                                 <Share2 size={20} />
                             </button>
-                            <button className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110">
+                            <button
+                                onClick={handlePrint}
+                                className="w-12 h-12 rounded-2xl glass-effect flex items-center justify-center border border-white/10 text-white/40 hover:text-white transition-all hover:scale-110 active:scale-95"
+                                title="출력하기"
+                            >
                                 <Printer size={20} />
                             </button>
+
+                            {showShareToast && (
+                                <div className="absolute -top-12 left-0 whitespace-nowrap bg-primary text-white text-[10px] font-black tracking-widest uppercase px-4 py-2 rounded-full animate-in fade-in slide-in-from-bottom-2 duration-300">
+                                    Link Copied!
+                                </div>
+                            )}
                         </div>
 
                         <div className="text-[10px] font-black tracking-widest uppercase text-white/20">
