@@ -87,7 +87,7 @@ const ContentManagement = () => {
                                     onChange={e => setFormData({ ...formData, category: e.target.value })}
                                 >
                                     <option value="연구정보">연구정보</option>
-                                    <option value="시술분석">시술분석</option>
+                                    <option value="참고 영상">참고 영상</option>
                                     <option value="세미나">세미나</option>
                                 </select>
                             </div>
