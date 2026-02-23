@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes';
 import paymentRoutes from './routes/paymentRoutes';
 import adminRoutes from './routes/adminRoutes';
 import contentRoutes from './routes/contentRoutes';
+import * as translateController from './controllers/translateController';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/contents', contentRoutes);
+app.post('/api/translate', translateController.translateText);
 
 import pool from './config/db';
 import bcrypt from 'bcryptjs';

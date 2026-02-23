@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { contentApi, authApi } from '../services/api'
 import { BookOpen, Lock, ArrowRight, FlaskConical, Play, Shield, ChevronRight } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const ResearchArchive = () => {
     const [contents, setContents] = useState<any[]>([])
@@ -10,8 +11,14 @@ const ResearchArchive = () => {
     const [category, setCategory] = useState('ALL')
     const [currentPage, setCurrentPage] = useState(1)
     const ITEMS_PER_PAGE = 9
-
+    const { t } = useLanguage()
     const categories = ['ALL', '연구정보', '참고 영상', '세미나']
+    const langCategories = {
+        'ALL': t('전체'),
+        '연구정보': t('연구정보'),
+        '참고 영상': t('참고 영상'),
+        '세미나': t('세미나')
+    }
 
     const checkAccess = async () => {
         try {
@@ -103,9 +110,9 @@ const ResearchArchive = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                     <div>
-                        <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">Subscriber Only</div>
-                        <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">연구 자료실</h1>
-                        <p className="text-white/50 text-lg font-medium">최신 동력 과학 연구 데이터와 전문 참고 영상을 탐독하십시오.</p>
+                        <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">{t('Subscriber Only')}</div>
+                        <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">{t('연구 자료실')}</h1>
+                        <p className="text-white/50 text-lg font-medium">{t('최신 동력 과학 연구 데이터와 전문 참고 영상을 탐독하십시오.')}</p>
                     </div>
 
                     <div className="flex gap-2 p-1.5 glass-effect rounded-2xl border border-white/5">
@@ -116,7 +123,7 @@ const ResearchArchive = () => {
                                 className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all ${category === cat ? 'premium-gradient text-white' : 'hover:bg-white/5 text-white/40'
                                     }`}
                             >
-                                {cat}
+                                {langCategories[cat as keyof typeof langCategories]}
                             </button>
                         ))}
                     </div>
@@ -125,7 +132,7 @@ const ResearchArchive = () => {
                 {filteredContents.length === 0 ? (
                     <div className="py-40 text-center glass-effect rounded-[40px] border border-dashed border-white/10">
                         <BookOpen className="mx-auto text-white/10 mb-6" size={64} />
-                        <p className="text-white/30 font-medium">해당 카테고리에 등록된 콘텐츠가 아직 없습니다.</p>
+                        <p className="text-white/30 font-medium">{t('해당 카테고리에 등록된 콘텐츠가 아직 없습니다.')}</p>
                     </div>
                 ) : (
                     <>
