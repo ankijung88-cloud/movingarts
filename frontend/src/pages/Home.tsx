@@ -105,7 +105,7 @@ const Home = () => {
                         <Link to={archiveLink} className="px-16 py-6 premium-gradient rounded-full text-xl font-bold hover:scale-105 transition-all flex items-center gap-4 mx-auto shadow-2xl shadow-primary/50">
                             {user?.role === 'admin' ? t('자료실 바로가기') : `${t('지금 가입하기')} - ${t('월 49,000원')}`} <ArrowRight size={24} />
                         </Link>
-                        <p className="text-white/30 text-xs mt-10 tracking-widest">{t('언제든 해지 가능')} | {t('7일 이내 환불 보장')}</p>
+                        <p className="text-white/30 text-xs mt-10 tracking-widest">{t('언제든 해지 가능')}</p>
                     </div>
                 </div>
             </section>
