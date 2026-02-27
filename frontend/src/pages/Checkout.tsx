@@ -16,7 +16,7 @@ const Checkout = () => {
     const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user')
+        const savedUser = sessionStorage.getItem('user')
         if (!savedUser) {
             alert(t('결제를 위해 로그인이 필요합니다.'))
             navigate('/')

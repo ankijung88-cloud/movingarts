@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user')
+        const savedUser = sessionStorage.getItem('user')
         if (!savedUser || JSON.parse(savedUser).role !== 'admin') {
             alert(t('관리자 권한이 필요합니다.'))
             navigate('/')

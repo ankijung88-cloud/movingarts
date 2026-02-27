@@ -18,8 +18,8 @@ const AuthModal = ({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: (
         try {
             if (isLogin) {
                 const { data } = await authApi.login({ email: formData.email, password: formData.password });
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('user', JSON.stringify(data.user));
             } else {
                 await authApi.register(formData);
                 setIsLogin(true);

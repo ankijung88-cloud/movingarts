@@ -8,7 +8,7 @@ const Pricing = () => {
     const { t } = useLanguage()
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user')
+        const savedUser = sessionStorage.getItem('user')
         if (savedUser) setUser(JSON.parse(savedUser))
     }, [])
 
