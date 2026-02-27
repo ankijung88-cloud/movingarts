@@ -27,14 +27,14 @@ const Navigation = () => {
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-2">
                         <div className="w-8 h-8 premium-gradient rounded-full flex items-center justify-center font-bold">A</div>
-                        <span className="font-bold text-lg tracking-tight">{t('신체 구조 움직임 연구소')}</span>
+                        <span className="font-bold text-lg tracking-tight">{t('신체 구조 움직임 자료방')}</span>
                     </Link>
 
                     <div className="hidden md:flex items-center gap-10 text-sm font-medium text-white/70">
                         <Link to="/archive" className="hover:text-white transition-colors">{t('연구 자료실')}</Link>
                         <Link to="/reference-videos" className="hover:text-white transition-colors">{t('참고 영상')}</Link>
                         <Link to="/seminars" className="hover:text-white transition-colors">{t('세미나')}</Link>
-                        <Link to="/about" className="hover:text-white transition-colors">{t('연구소 소개')}</Link>
+                        <Link to="/about" className="hover:text-white transition-colors">{t('자료방 소개')}</Link>
                     </div>
 
                     <div className="flex items-center gap-6">

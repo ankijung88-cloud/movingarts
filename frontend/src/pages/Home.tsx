@@ -24,7 +24,7 @@ const Home = () => {
 
                 <div className="container mx-auto px-6 flex flex-col items-center text-center relative z-10">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-effect text-[10px] font-bold tracking-widest uppercase text-primary mb-10 border border-primary/20">
-                        {t('신체 구조 및 움직임 연구소')} | {t('Vol. 01 발행')}
+                        {t('신체 구조 및 움직임 자료방')} | {t('Vol. 01 발행')}
                     </div>
 
                     <h1 className="text-5xl md:text-8xl font-black mb-10 leading-[1.1] tracking-tighter">

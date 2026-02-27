@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-2">
-                        <h3 className="text-xl font-bold mb-6">{t('신체 구조 움직임 연구소')}</h3>
+                        <h3 className="text-xl font-bold mb-6">{t('신체 구조 움직임 자료방')}</h3>
                         <p className="text-white/50 text-sm leading-relaxed max-w-sm">
                             {t('최상의 신체 퍼포먼스를 위한 전술적 신체 교정과 연구를 통해 구조적 결함에 대한 과학적 해법을 제시합니다.')}
                         </p>

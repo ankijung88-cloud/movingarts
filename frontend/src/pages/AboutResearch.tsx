@@ -9,11 +9,11 @@ const AboutResearch = () => {
                 {/* Introduction Section */}
                 <div className="mb-32">
                     <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-4">{t('About Us')}</div>
-                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12">{t('연구소 소개')}</h1>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12">{t('자료방 소개')}</h1>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
                         <div className="space-y-8">
-                            <h2 className="text-3xl font-bold tracking-tight text-white/90">{t('신체 구조 움직임 연구소는')}<br />{t('최상의 움직임을 향한 깊이 있는 통찰을 제공합니다.')}</h2>
+                            <h2 className="text-3xl font-bold tracking-tight text-white/90">{t('신체 구조 움직임 자료방은')}<br />{t('최상의 움직임을 향한 깊이 있는 통찰을 제공합니다.')}</h2>
                             <p className="text-white/60 text-lg leading-relaxed font-medium">
                                 {t('우리는 인체의 복잡한 구조와 동력 과학을 연구하여, 효율적이고 통증 없는 움직임을 실현하기 위한 학술적 기반을 마련합니다.')}
                                 {t('전문적인 시술 분석과 연구 데이터를 통해 전문가와 일반인 모두가 신체의 가능성을 극대화할 수 있도록 돕고 있습니다.')}

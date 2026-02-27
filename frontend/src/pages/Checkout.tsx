@@ -46,7 +46,7 @@ const Checkout = () => {
                 amount
             })
 
-            alert(t('구독 결제가 완료되었습니다! 연구소 서비스를 이용하실 수 있습니다.'))
+            alert(t('구독 결제가 완료되었습니다! 자료방 서비스를 이용하실 수 있습니다.'))
             navigate('/')
         } catch (err) {
             alert(t('결제 처리 중 오류가 발생했습니다.'))
@@ -107,7 +107,7 @@ const Checkout = () => {
                                 <div>
                                     <h4 className="font-bold mb-2">{t('보안 결제 안내')}</h4>
                                     <p className="text-sm text-white/50 leading-relaxed">
-                                        {t('본 연구소는 포트원(PortOne) 보안 시스템을 통해 귀하의 결제 정보를 암호화 기술로 보호합니다.')}
+                                        {t('본 자료방은 포트원(PortOne) 보안 시스템을 통해 귀하의 결제 정보를 암호화 기술로 보호합니다.')}
                                         {t('신용카드 번호는 서버에 직접 저장되지 않으며 결제사로 즉시 전달됩니다.')}
                                     </p>
                                 </div>
