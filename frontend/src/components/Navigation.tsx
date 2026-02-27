@@ -23,7 +23,7 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className="fixed top-0 w-full z-50 glass-effect border-b border-white/5 py-4">
+            <nav className="fixed top-0 w-full z-50 bg-[#0F172A] border-b border-white/5 py-4">
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-2">
                         <div className="w-8 h-8 premium-gradient rounded-full flex items-center justify-center font-bold">A</div>
