@@ -83,7 +83,7 @@ const Pricing = () => {
                         <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[100px] lg:min-h-[80px]">
                             <div className="break-keep">
                                 <h3 className="text-2xl font-bold mb-2">{t('월간 연구 멤버십')}</h3>
-                                <p className="text-white/40 text-sm whitespace-nowrap">{t('매월 자유로운 갱신 및 해지')}</p>
+                                <p className="text-white/40 text-sm whitespace-nowrap">{t('매월 자유로운 갱신 및 해지')}<br />&nbsp;</p>
                             </div>
                             <div className="lg:text-right">
                                 <div className="text-4xl font-black whitespace-nowrap">₩55,000</div>
@@ -123,7 +123,7 @@ const Pricing = () => {
                         <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[100px] lg:min-h-[80px]">
                             <div className="break-keep">
                                 <h3 className="text-2xl font-bold mb-2">{t('연간 연구 멤버십')}</h3>
-                                <p className="text-primary/70 text-sm font-bold tracking-tight break-keep">{t('연간 결제 시 20% 특별 혜택 적용')}</p>
+                                <p className="text-primary/70 text-sm font-bold tracking-tight break-keep">{t('연간 결제 시 20% 특별 혜택 적용')}<br />&nbsp;</p>
                             </div>
                             <div className="lg:text-right">
                                 <div className="text-4xl font-black whitespace-nowrap">₩490,000</div>
