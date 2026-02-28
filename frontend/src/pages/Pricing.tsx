@@ -80,10 +80,10 @@ const Pricing = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-32">
                     {/* Monthly Plan */}
                     <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5 flex flex-col h-full">
-                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[120px] lg:min-h-[110px]">
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[140px] lg:min-h-[120px]">
                             <div className="break-keep">
-                                <h3 className="text-2xl font-bold mb-2">{t('월간 연구 멤버십')}</h3>
-                                <p className="text-white/40 text-sm whitespace-nowrap">{t('매월 자유로운 갱신 및 해지')}</p>
+                                <h3 className="text-2xl font-bold mb-2 h-[32px]">{t('월간 연구 멤버십')}</h3>
+                                <p className="text-white/40 text-sm whitespace-nowrap min-h-[20px]">{t('매월 자유로운 갱신 및 해지')}</p>
                             </div>
                             <div className="lg:text-right">
                                 <div className="text-4xl font-black whitespace-nowrap">₩55,000</div>
@@ -91,7 +91,7 @@ const Pricing = () => {
                             </div>
                         </div>
 
-                        <div className="mt-auto">
+                        <div className="flex-1">
                             <Link to="/checkout?plan=monthly" className="block w-full py-5 premium-gradient rounded-full text-center font-bold text-lg mb-12 hover:scale-[1.02] transition-transform">
                                 {t('멤버십 시작하기')}
                             </Link>
@@ -100,15 +100,15 @@ const Pricing = () => {
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Zap size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('전용 학술 분석')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('구조 정렬과 신체 동역학에 매주 업데이트되는 100건 이상의 텍스트/영상 자료를 무제한 열람 가능')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('전용 학술 분석')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('구조 정렬과 신체 동역학에 매주 업데이트되는 100건 이상의 텍스트/영상 자료를 무제한 열람 가능')}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Users size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('연구진 Q&A 게시판')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('질문 등록 시 분석팀 및 Q&A 전문 위원이 24시간 이내 직접적 피드백 제공')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('연구진 Q&A 게시판')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('질문 등록 시 분석팀 및 Q&A 전문 위원이 24시간 이내 직접적 피드백 제공')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,10 +120,10 @@ const Pricing = () => {
                         <div className="absolute top-0 right-0 py-2 px-8 premium-gradient text-[10px] font-black tracking-widest uppercase rounded-bl-3xl">BEST VALUE</div>
                         <div className="absolute inset-0 bg-primary/10 -z-10 bg-glass-gradient opacity-20"></div>
 
-                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[120px] lg:min-h-[110px]">
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[140px] lg:min-h-[120px]">
                             <div className="break-keep">
-                                <h3 className="text-2xl font-bold mb-2">{t('연간 연구 멤버십')}</h3>
-                                <p className="text-primary/70 text-sm font-bold tracking-tight break-keep">{t('연간 결제 시 20% 특별 혜택 적용')}</p>
+                                <h3 className="text-2xl font-bold mb-2 h-[32px]">{t('연간 연구 멤버십')}</h3>
+                                <p className="text-primary/70 text-sm font-bold tracking-tight break-keep min-h-[20px]">{t('연간 결제 시 20% 특별 혜택 적용')}</p>
                             </div>
                             <div className="lg:text-right">
                                 <div className="text-4xl font-black whitespace-nowrap">₩490,000</div>
@@ -131,7 +131,7 @@ const Pricing = () => {
                             </div>
                         </div>
 
-                        <div className="mt-auto">
+                        <div className="flex-1">
                             <Link to="/checkout?plan=yearly" className="block w-full py-5 premium-gradient rounded-full text-center font-bold text-lg mb-12 hover:scale-[1.02] transition-transform shadow-xl shadow-primary/30">
                                 {t('연간 멤버십 시작하기')}
                             </Link>
@@ -140,15 +140,15 @@ const Pricing = () => {
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center shrink-0"><ShieldCheck size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('프리미엄 레포트 발송')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('매분기 발행되는 분과별 통합 연구 레포트 실물 책자 및 PDF 파일 우선 제공')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('프리미엄 레포트 발송')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('매분기 발행되는 분과별 통합 연구 레포트 실물 책자 및 PDF 파일 우선 제공')}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center shrink-0"><Monitor size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('오프라인 세미나 초대')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('연간 회원을 위한 정규 오프라인 세미나 1회 무료 참가권 및 우선 대기 등록 권한')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('오프라인 세미나 초대')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('연간 회원을 위한 정규 오프라인 세미나 1회 무료 참가권 및 우선 대기 등록 권한')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +157,10 @@ const Pricing = () => {
 
                     {/* Membership Approval Request Card */}
                     <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5 flex flex-col h-full">
-                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[120px] lg:min-h-[110px]">
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12 min-h-[140px] lg:min-h-[120px]">
                             <div className="break-keep">
-                                <h3 className="text-2xl font-bold mb-2">{t('멤버십 승인 요청')}</h3>
-                                <p className="text-white/40 text-sm break-keep">{t('관리자 직접 승인을 통한 프리미엄 멤버십')}</p>
+                                <h3 className="text-2xl font-bold mb-2 h-[32px]">{t('멤버십 승인 요청')}</h3>
+                                <p className="text-white/40 text-sm break-keep min-h-[20px]">{t('관리자 직접 승인을 통한 프리미엄 멤버십')}</p>
                             </div>
                             <div className="lg:text-right">
                                 <div className="text-4xl font-black whitespace-nowrap">{t('상담문의')}</div>
@@ -168,7 +168,7 @@ const Pricing = () => {
                             </div>
                         </div>
 
-                        <div className="mt-auto">
+                        <div className="flex-1">
                             <button
                                 onClick={handleRequest}
                                 disabled={isSubmitting || requestStatus?.status === 'pending' || requestStatus?.status === 'approved'}
@@ -192,15 +192,15 @@ const Pricing = () => {
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Users size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('맞춤형 서비스')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('관리자 페이지에서 승인을 거쳐 전용 자료실 및 오프라인 콘텐츠 이용이 가능합니다.')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('맞춤형 서비스')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('관리자 페이지에서 승인을 거쳐 전용 자료실 및 오프라인 콘텐츠 이용이 가능합니다.')}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Check size={18} className="text-primary" /></div>
                                     <div>
-                                        <h4 className="text-sm font-bold mb-1">{t('멤버십 동일 혜택')}</h4>
-                                        <p className="text-xs text-white/40 leading-relaxed break-keep">{t('결제 수단이 없는 경우 혹은 별도 논의 후 승인된 경우 동일한 연구원 혜택이 제공됩니다.')}</p>
+                                        <h4 className="text-sm font-bold mb-1 min-h-[20px]">{t('멤버십 동일 혜택')}</h4>
+                                        <p className="text-xs text-white/40 leading-relaxed break-keep min-h-[48px]">{t('결제 수단이 없는 경우 혹은 별도 논의 후 승인된 경우 동일한 연구원 혜택이 제공됩니다.')}</p>
                                     </div>
                                 </div>
                             </div>
