@@ -71,8 +71,8 @@ const Pricing = () => {
                 <div className="text-center mb-24">
                     <div className="text-primary text-[10px] font-black tracking-widest uppercase mb-6">MEMBERSHIP PLANS</div>
                     <h1 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter">{t('이해의 깊이를 더하다')}: <br /><span className="text-primary italic">{t('멤버십 혜택')}</span></h1>
-                    <p className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto">
-                        {t('무술 상호작용 및 신체 구조 동작 이론에 대한 전문적인 학문적 접근을 제공합니다.')} <br />
+                    <p className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto break-keep">
+                        {t('무술 상호작용 및 신체 구조 동작 이론에 대한 전문적인 학문적 접근을 제공합니다.')} <br className="hidden md:block" />
                         {t('깊이와 효율의 조화를 추구하는 연구원분들께 최선의 선택입니다.')}
                     </p>
                 </div>
@@ -80,13 +80,13 @@ const Pricing = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-32">
                     {/* Monthly Plan */}
                     <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5">
-                        <div className="flex justify-between items-start mb-12">
-                            <div>
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12">
+                            <div className="break-keep">
                                 <h3 className="text-2xl font-bold mb-2">{t('월간 연구 멤버십')}</h3>
-                                <p className="text-white/40 text-sm">{t('매월 자유로운 갱신 및 해지')}</p>
+                                <p className="text-white/40 text-sm whitespace-nowrap">{t('매월 자유로운 갱신 및 해지')}</p>
                             </div>
-                            <div className="text-right">
-                                <div className="text-4xl font-black">₩55,000</div>
+                            <div className="lg:text-right">
+                                <div className="text-4xl font-black whitespace-nowrap">₩55,000</div>
                                 <div className="text-[10px] text-white/30 uppercase tracking-widest mt-1">per month</div>
                             </div>
                         </div>
@@ -100,14 +100,14 @@ const Pricing = () => {
                                 <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Zap size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('전용 학술 분석')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('구조 정렬과 신체 동역학에 매주 업데이트되는 100건 이상의 텍스트/영상 자료를 무제한 열람 가능')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('구조 정렬과 신체 동역학에 매주 업데이트되는 100건 이상의 텍스트/영상 자료를 무제한 열람 가능')}</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Users size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('연구진 Q&A 게시판')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('질문 등록 시 분석팀 및 Q&A 전문 위원이 24시간 이내 직접적 피드백 제공')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('질문 등록 시 분석팀 및 Q&A 전문 위원이 24시간 이내 직접적 피드백 제공')}</p>
                                 </div>
                             </div>
                         </div>
@@ -118,13 +118,13 @@ const Pricing = () => {
                         <div className="absolute top-0 right-0 py-2 px-8 premium-gradient text-[10px] font-black tracking-widest uppercase rounded-bl-3xl">BEST VALUE</div>
                         <div className="absolute inset-0 bg-primary/10 -z-10 bg-glass-gradient opacity-20"></div>
 
-                        <div className="flex justify-between items-start mb-12">
-                            <div>
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12">
+                            <div className="break-keep">
                                 <h3 className="text-2xl font-bold mb-2">{t('연간 연구 멤버십')}</h3>
-                                <p className="text-primary/70 text-sm font-bold tracking-tight">{t('연간 결제 시 20% 특별 혜택 적용')}</p>
+                                <p className="text-primary/70 text-sm font-bold tracking-tight break-keep">{t('연간 결제 시 20% 특별 혜택 적용')}</p>
                             </div>
-                            <div className="text-right">
-                                <div className="text-4xl font-black">₩490,000</div>
+                            <div className="lg:text-right">
+                                <div className="text-4xl font-black whitespace-nowrap">₩490,000</div>
                                 <div className="text-[10px] text-white/30 uppercase tracking-widest mt-1">per year</div>
                             </div>
                         </div>
@@ -138,14 +138,14 @@ const Pricing = () => {
                                 <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center shrink-0"><ShieldCheck size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('프리미엄 레포트 발송')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('매분기 발행되는 분과별 통합 연구 레포트 실물 책자 및 PDF 파일 우선 제공')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('매분기 발행되는 분과별 통합 연구 레포트 실물 책자 및 PDF 파일 우선 제공')}</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center shrink-0"><Monitor size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('오프라인 세미나 초대')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('연간 회원을 위한 정규 오프라인 세미나 1회 무료 참가권 및 우선 대기 등록 권한')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('연간 회원을 위한 정규 오프라인 세미나 1회 무료 참가권 및 우선 대기 등록 권한')}</p>
                                 </div>
                             </div>
                         </div>
@@ -153,13 +153,13 @@ const Pricing = () => {
 
                     {/* Membership Approval Request Card */}
                     <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5">
-                        <div className="flex justify-between items-start mb-12">
-                            <div>
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-12">
+                            <div className="break-keep">
                                 <h3 className="text-2xl font-bold mb-2">{t('멤버십 승인 요청')}</h3>
-                                <p className="text-white/40 text-sm">{t('관리자 직접 승인을 통한 프리미엄 멤버십')}</p>
+                                <p className="text-white/40 text-sm break-keep">{t('관리자 직접 승인을 통한 프리미엄 멤버십')}</p>
                             </div>
-                            <div className="text-right">
-                                <div className="text-4xl font-black">{t('상담문의')}</div>
+                            <div className="lg:text-right">
+                                <div className="text-4xl font-black whitespace-nowrap">{t('상담문의')}</div>
                                 <div className="text-[10px] text-white/30 uppercase tracking-widest mt-1">{t('direct approval')}</div>
                             </div>
                         </div>
@@ -188,14 +188,14 @@ const Pricing = () => {
                                 <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Users size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('맞춤형 서비스')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('관리자 페이지에서 승인을 거쳐 전용 자료실 및 오프라인 콘텐츠 이용이 가능합니다.')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('관리자 페이지에서 승인을 거쳐 전용 자료실 및 오프라인 콘텐츠 이용이 가능합니다.')}</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Check size={18} className="text-primary" /></div>
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('멤버십 동일 혜택')}</h4>
-                                    <p className="text-xs text-white/40 leading-relaxed">{t('결제 수단이 없는 경우 혹은 별도 논의 후 승인된 경우 동일한 연구원 혜택이 제공됩니다.')}</p>
+                                    <p className="text-xs text-white/40 leading-relaxed break-keep">{t('결제 수단이 없는 경우 혹은 별도 논의 후 승인된 경우 동일한 연구원 혜택이 제공됩니다.')}</p>
                                 </div>
                             </div>
                         </div>
