@@ -2,15 +2,50 @@ import { useState, useEffect } from 'react'
 import { Check, Info, ShieldCheck, Zap, Users, Monitor, LockOpen } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
+import { authApi } from '../services/api'
 
 const Pricing = () => {
     const [user, setUser] = useState<any>(null)
+    const [requestStatus, setRequestStatus] = useState<any>(null)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const { t } = useLanguage()
 
     useEffect(() => {
         const savedUser = sessionStorage.getItem('user')
-        if (savedUser) setUser(JSON.parse(savedUser))
+        if (savedUser) {
+            const parsedUser = JSON.parse(savedUser)
+            setUser(parsedUser)
+            fetchStatus()
+        }
     }, [])
+
+    const fetchStatus = async () => {
+        try {
+            const { data } = await authApi.getMembershipStatus()
+            setRequestStatus(data)
+        } catch (err) {
+            console.error('Failed to fetch status:', err)
+        }
+    }
+
+    const handleRequest = async () => {
+        if (!user) {
+            alert(t('로그인이 필요합니다.'))
+            return
+        }
+        if (requestStatus?.status === 'pending') return
+
+        setIsSubmitting(true)
+        try {
+            await authApi.submitMembershipRequest({ requestDetails: 'Manual Membership Request' })
+            alert(t('승인 요청이 완료되었습니다.'))
+            fetchStatus()
+        } catch (err) {
+            alert(t('요청 중 오류가 발생했습니다.'))
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     const isAdmin = user?.role === 'admin'
 
@@ -42,7 +77,7 @@ const Pricing = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-32">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-32">
                     {/* Monthly Plan */}
                     <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5">
                         <div className="flex justify-between items-start mb-12">
@@ -111,6 +146,56 @@ const Pricing = () => {
                                 <div>
                                     <h4 className="text-sm font-bold mb-1">{t('오프라인 세미나 초대')}</h4>
                                     <p className="text-xs text-white/40 leading-relaxed">{t('연간 회원을 위한 정규 오프라인 세미나 1회 무료 참가권 및 우선 대기 등록 권한')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Membership Approval Request Card */}
+                    <div className="glass-effect p-12 rounded-[50px] relative overflow-hidden group hover:border-primary/50 transition-all border border-white/5">
+                        <div className="flex justify-between items-start mb-12">
+                            <div>
+                                <h3 className="text-2xl font-bold mb-2">{t('멤버십 승인 요청')}</h3>
+                                <p className="text-white/40 text-sm">{t('관리자 직접 승인을 통한 프리미엄 멤버십')}</p>
+                            </div>
+                            <div className="text-right">
+                                <div className="text-4xl font-black">{t('상담문의')}</div>
+                                <div className="text-[10px] text-white/30 uppercase tracking-widest mt-1">{t('direct approval')}</div>
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={handleRequest}
+                            disabled={isSubmitting || requestStatus?.status === 'pending' || requestStatus?.status === 'approved'}
+                            className={`w-full py-5 rounded-full text-center font-bold text-lg mb-12 transition-all ${requestStatus?.status === 'approved'
+                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-default'
+                                : requestStatus?.status === 'pending'
+                                    ? 'bg-white/10 text-white/40 border border-white/5 cursor-default'
+                                    : 'premium-gradient hover:scale-[1.02]'
+                                }`}
+                        >
+                            {requestStatus?.status === 'approved'
+                                ? t('멤버십 활성됨')
+                                : requestStatus?.status === 'pending'
+                                    ? t('승인 대기중')
+                                    : isSubmitting
+                                        ? t('요청 중...')
+                                        : t('승인요청 하기')}
+                        </button>
+
+                        <div className="space-y-6">
+                            <div className="flex gap-4">
+                                <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Users size={18} className="text-primary" /></div>
+                                <div>
+                                    <h4 className="text-sm font-bold mb-1">{t('맞춤형 서비스')}</h4>
+                                    <p className="text-xs text-white/40 leading-relaxed">{t('관리자 페이지에서 승인을 거쳐 전용 자료실 및 오프라인 콘텐츠 이용이 가능합니다.')}</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-4">
+                                <div className="w-10 h-10 glass-effect rounded-xl flex items-center justify-center shrink-0"><Check size={18} className="text-primary" /></div>
+                                <div>
+                                    <h4 className="text-sm font-bold mb-1">{t('멤버십 동일 혜택')}</h4>
+                                    <p className="text-xs text-white/40 leading-relaxed">{t('결제 수단이 없는 경우 혹은 별도 논의 후 승인된 경우 동일한 연구원 혜택이 제공됩니다.')}</p>
                                 </div>
                             </div>
                         </div>

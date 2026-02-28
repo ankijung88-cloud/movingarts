@@ -16,4 +16,7 @@ router.post('/contents', adminController.createContent);
 router.put('/contents/:id', adminController.updateContent);
 router.delete('/contents/:id', adminController.deleteContent);
 
+router.get('/membership-requests', adminController.getMembershipRequests);
+router.put('/membership-requests/:id/approve', adminController.approveMembershipRequest);
+
 export default router;

@@ -68,3 +68,61 @@ export const deleteContent = async (req: Request, res: Response) => {
         res.status(500).json({ message: '콘텐츠 삭제에 실패했습니다.' });
     }
 };
+
+export const getMembershipRequests = async (req: Request, res: Response) => {
+    try {
+        const [requests] = await pool.execute(`
+            SELECT r.*, u.name as user_name, u.email as user_email 
+            FROM membership_requests r 
+            JOIN users u ON r.user_id = u.id
+            ORDER BY r.created_at DESC
+        `);
+        res.json(requests);
+    } catch (err) {
+        res.status(500).json({ message: '멤버십 요청 목록을 불러오는데 실패했습니다.' });
+    }
+};
+
+export const approveMembershipRequest = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { adminComment } = req.body;
+
+    const connection = await pool.getConnection();
+    try {
+        await connection.beginTransaction();
+
+        // 1. Get request info
+        const [requests] = await connection.execute('SELECT * FROM membership_requests WHERE id = ?', [id]) as any[];
+        if (requests.length === 0) {
+            await connection.rollback();
+            return res.status(404).json({ message: '요청을 찾을 수 없습니다.' });
+        }
+        const request = requests[0];
+
+        // 2. Update request status
+        await connection.execute(
+            'UPDATE membership_requests SET status = "approved", admin_comment = ? WHERE id = ?',
+            [adminComment || 'Approved by admin', id]
+        );
+
+        // 3. Create/Update membership
+        // Default to yearly for manual approval as per user instruction for "membership"
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setFullYear(startDate.getFullYear() + 1);
+
+        await connection.execute(
+            'INSERT INTO memberships (user_id, type, status, start_date, end_date) VALUES (?, ?, ?, ?, ?)',
+            [request.user_id, 'yearly', 'active', startDate, endDate]
+        );
+
+        await connection.commit();
+        res.json({ message: '멤버십이 승인되었습니다.' });
+    } catch (err) {
+        await connection.rollback();
+        console.error(err);
+        res.status(500).json({ message: '승인 처리 중 오류가 발생했습니다.' });
+    } finally {
+        connection.release();
+    }
+};

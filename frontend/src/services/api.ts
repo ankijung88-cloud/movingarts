@@ -20,6 +20,8 @@ export const authApi = {
     getProfile: () => api.get('/users/profile'),
     findEmail: (data: any) => api.post('/users/find-email', data),
     resetPasswordRequest: (data: any) => api.post('/users/reset-password-request', data),
+    submitMembershipRequest: (data: any) => api.post('/users/membership-request', data),
+    getMembershipStatus: () => api.get('/users/membership-status'),
 };
 
 export const paymentApi = {
@@ -33,6 +35,8 @@ export const adminApi = {
     createContent: (data: any) => api.post('/admin/contents', data),
     updateContent: (id: number, data: any) => api.put(`/admin/contents/${id}`, data),
     deleteContent: (id: number) => api.delete(`/admin/contents/${id}`),
+    getMembershipRequests: () => api.get('/admin/membership-requests'),
+    approveMembershipRequest: (id: number, data: any) => api.put(`/admin/membership-requests/${id}/approve`, data),
 };
 
 export const contentApi = {
