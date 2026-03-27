@@ -25,13 +25,19 @@ export const getMemberships = async (req: Request, res: Response) => {
 
 export const createContent = async (req: any, res: Response) => {
     const { title, content, category } = req.body;
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    
+    const thumbnailUrl = files?.thumbnail?.[0] ? `/uploads/${files.thumbnail[0].filename}` : null;
+    const videoUrl = files?.video?.[0] ? `/uploads/${files.video[0].filename}` : null;
+
     try {
         await pool.execute(
-            'INSERT INTO research_content (title, content, category, author_id) VALUES (?, ?, ?, ?)',
-            [title, content, category, req.user.id]
+            'INSERT INTO research_content (title, content, category, thumbnail_url, video_url, author_id) VALUES (?, ?, ?, ?, ?, ?)',
+            [title, content, category, thumbnailUrl, videoUrl, req.user.id]
         );
         res.status(201).json({ message: '콘텐츠가 성공적으로 등록되었습니다.' });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: '콘텐츠 등록에 실패했습니다.' });
     }
 };
@@ -45,16 +51,26 @@ export const getContents = async (req: Request, res: Response) => {
     }
 };
 
-export const updateContent = async (req: Request, res: Response) => {
+export const updateContent = async (req: any, res: Response) => {
     const { id } = req.params;
     const { title, content, category } = req.body;
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
     try {
+        // Get existing content to preserve old files if new ones aren't uploaded
+        const [rows]: any = await pool.execute('SELECT thumbnail_url, video_url FROM research_content WHERE id = ?', [id]);
+        if (rows.length === 0) return res.status(404).json({ message: '콘텐츠를 찾을 수 없습니다.' });
+
+        const thumbnailUrl = files?.thumbnail?.[0] ? `/uploads/${files.thumbnail[0].filename}` : rows[0].thumbnail_url;
+        const videoUrl = files?.video?.[0] ? `/uploads/${files.video[0].filename}` : rows[0].video_url;
+
         await pool.execute(
-            'UPDATE research_content SET title = ?, content = ?, category = ? WHERE id = ?',
-            [title, content, category, id]
+            'UPDATE research_content SET title = ?, content = ?, category = ?, thumbnail_url = ?, video_url = ? WHERE id = ?',
+            [title, content, category, thumbnailUrl, videoUrl, id]
         );
         res.json({ message: '콘텐츠가 수정되었습니다.' });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: '콘텐츠 수정에 실패했습니다.' });
     }
 };

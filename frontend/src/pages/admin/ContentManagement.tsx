@@ -11,6 +11,8 @@ const ContentManagement = () => {
     const [editMode, setEditMode] = useState(false)
     const [currentId, setCurrentId] = useState<number | null>(null)
     const [formData, setFormData] = useState({ title: '', content: '', category: '연구정보' })
+    const [thumbnail, setThumbnail] = useState<File | null>(null)
+    const [video, setVideo] = useState<File | null>(null)
 
     const fetchContents = async () => {
         try {
@@ -29,14 +31,23 @@ const ContentManagement = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        const data = new FormData()
+        data.append('title', formData.title)
+        data.append('content', formData.content)
+        data.append('category', formData.category)
+        if (thumbnail) data.append('thumbnail', thumbnail)
+        if (video) data.append('video', video)
+
         try {
             if (editMode && currentId) {
-                await adminApi.updateContent(currentId, formData)
+                await adminApi.updateContent(currentId, data)
             } else {
-                await adminApi.createContent(formData)
+                await adminApi.createContent(data)
             }
             setIsFormOpen(false)
             setFormData({ title: '', content: '', category: '연구정보' })
+            setThumbnail(null)
+            setVideo(null)
             fetchContents()
         } catch (err) {
             alert(t('저장에 실패했습니다.'))
@@ -110,6 +121,26 @@ const ContentManagement = () => {
                                     value={formData.content}
                                     onChange={e => setFormData({ ...formData, content: e.target.value })}
                                 />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black tracking-widest uppercase text-white/40">{t('썸네일 이미지')}</label>
+                                    <input
+                                        type="file" accept="image/*"
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary text-xs file:hidden"
+                                        onChange={e => setThumbnail(e.target.files?.[0] || null)}
+                                    />
+                                    {thumbnail && <p className="text-[10px] text-primary mt-1">{thumbnail.name}</p>}
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black tracking-widest uppercase text-white/40">{t('영상 파일')}</label>
+                                    <input
+                                        type="file" accept="video/mp4,video/quicktime"
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary text-xs file:hidden"
+                                        onChange={e => setVideo(e.target.files?.[0] || null)}
+                                    />
+                                    {video && <p className="text-[10px] text-primary mt-1">{video.name}</p>}
+                                </div>
                             </div>
                             <div className="flex gap-4 pt-6">
                                 <button type="submit" className="flex-grow py-5 premium-gradient rounded-full font-bold text-lg">{t('저장하기')}</button>

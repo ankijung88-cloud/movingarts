@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS research_content (
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     category VARCHAR(100),
+    thumbnail_url VARCHAR(500),
+    video_url VARCHAR(500),
     author_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE

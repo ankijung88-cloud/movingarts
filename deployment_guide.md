@@ -61,8 +61,25 @@ sudo npm install -g pm2
     cd <project-folder>/backend
     npm install
     ```
-3.  **Setup .env**: `nano .env` (Paste your environment variables)
-4.  **Run with PM2**:
+5.  **SSD Migration (Optional)**: If you want to move your database to a faster SSD partition (e.g., `/mnt/ssd`), run:
     ```bash
-    pm2 start src/server.ts --name "movingarts-api" --interpreter npx ts-node
+    chmod +x backend/scripts/migrate_to_ssd.sh
+    sudo ./backend/scripts/migrate_to_ssd.sh
     ```
+
+6.  **Media Upload Setup**:
+    ```bash
+    # 1. Create uploads directory and set permissions
+    chmod +x backend/scripts/upload_setup.sh
+    ./backend/scripts/upload_setup.sh
+
+    # 2. Update database schema for media columns
+    # Replace 'your_password' with your DB password
+    mysql -u root -p'your_password' movingarts_db < backend/scripts/update_schema_media.sql
+    ```
+
+## 4. Intuitive Management with WinSCP
+To manage files and the database intuitively from your Windows machine:
+1.  Follow the [WinSCP Setup Guide](file:///c:/dev/movingarts_theory/winscp_setup.md).
+2.  Use the SFTP connection (`3.36.149.255`) with your `.pem` key.
+3.  Navigate to `/home/ubuntu/movingarts_theory` to manage project files directly.
