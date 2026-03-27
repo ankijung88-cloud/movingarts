@@ -25,7 +25,7 @@ export const getMemberships = async (req: Request, res: Response) => {
 
 export const createContent = async (req: any, res: Response) => {
     const { title, content, category } = req.body;
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const files = req.files as { [fieldname: string]: any[] };
     
     const thumbnailUrl = files?.thumbnail?.[0] ? `/uploads/${files.thumbnail[0].filename}` : null;
     const videoUrl = files?.video?.[0] ? `/uploads/${files.video[0].filename}` : null;
@@ -54,7 +54,7 @@ export const getContents = async (req: Request, res: Response) => {
 export const updateContent = async (req: any, res: Response) => {
     const { id } = req.params;
     const { title, content, category } = req.body;
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const files = req.files as { [fieldname: string]: any[] };
 
     try {
         // Get existing content to preserve old files if new ones aren't uploaded
