@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resetPasswordRequest = exports.findEmail = exports.getProfile = exports.login = exports.register = void 0;
+exports.getMembershipStatus = exports.submitMembershipRequest = exports.resetPasswordRequest = exports.findEmail = exports.getProfile = exports.login = exports.register = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = __importDefault(require("../config/db"));
@@ -110,3 +110,33 @@ const resetPasswordRequest = async (req, res) => {
     }
 };
 exports.resetPasswordRequest = resetPasswordRequest;
+const submitMembershipRequest = async (req, res) => {
+    const userId = req.user.id;
+    const { requestDetails } = req.body;
+    try {
+        // Check if there's already a pending request
+        const [existing] = await db_1.default.query('SELECT id FROM membership_requests WHERE user_id = ? AND status = "pending"', [userId]);
+        if (existing.length > 0) {
+            return res.status(400).json({ message: '이미 대기 중인 승인 요청이 있습니다.' });
+        }
+        await db_1.default.query('INSERT INTO membership_requests (user_id, request_details) VALUES (?, ?)', [userId, requestDetails || 'Normal membership request']);
+        res.status(201).json({ message: '멤버십 승인 요청이 전송되었습니다.' });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: '데이터처리 중 오류가 발생했습니다.' });
+    }
+};
+exports.submitMembershipRequest = submitMembershipRequest;
+const getMembershipStatus = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const [requests] = await db_1.default.query('SELECT * FROM membership_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 1', [userId]);
+        res.json(requests[0] || null);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: '상태 정보를 불러오는데 실패했습니다.' });
+    }
+};
+exports.getMembershipStatus = getMembershipStatus;

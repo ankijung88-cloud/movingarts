@@ -52,6 +52,21 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'MovingArts Backend is running' });
 });
 
+// Global Error Handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error('SERVER_ERROR:', err);
+    
+    // Handle Multer errors
+    if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ message: '파일 크기가 너무 큽니다. (최대 100MB)' });
+    }
+    
+    res.status(err.status || 500).json({ 
+        message: err.message || '서버 내부 오류가 발생했습니다.',
+        error: process.env.NODE_ENV === 'development' ? err : {}
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

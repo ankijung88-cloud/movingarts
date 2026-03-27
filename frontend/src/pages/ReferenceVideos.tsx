@@ -113,6 +113,26 @@ const ReferenceVideos = () => {
                                             {new Date(content.created_at).toLocaleDateString()}
                                         </div>
                                     </div>
+
+                                    <div className="relative h-48 overflow-hidden rounded-[30px] mb-8 border border-white/5 bg-black/20">
+                                        {content.thumbnail_url ? (
+                                            <img 
+                                                src={content.thumbnail_url} 
+                                                alt={content.title} 
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center">
+                                                <VideoIcon size={40} className="text-white/10" />
+                                            </div>
+                                        )}
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                            <div className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center border border-white/20">
+                                                <VideoIcon size={20} className="text-white fill-white" />
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors leading-tight line-clamp-2">
                                         {content.title}
                                     </h3>

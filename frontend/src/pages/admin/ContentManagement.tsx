@@ -11,6 +11,7 @@ const ContentManagement = () => {
     const [editMode, setEditMode] = useState(false)
     const [currentId, setCurrentId] = useState<number | null>(null)
     const [formData, setFormData] = useState({ title: '', content: '', category: '연구정보' })
+    const [submitting, setSubmitting] = useState(false)
     const [thumbnail, setThumbnail] = useState<File | null>(null)
     const [video, setVideo] = useState<File | null>(null)
 
@@ -38,6 +39,7 @@ const ContentManagement = () => {
         if (thumbnail) data.append('thumbnail', thumbnail)
         if (video) data.append('video', video)
 
+        setSubmitting(true)
         try {
             if (editMode && currentId) {
                 await adminApi.updateContent(currentId, data)
@@ -49,8 +51,13 @@ const ContentManagement = () => {
             setThumbnail(null)
             setVideo(null)
             fetchContents()
-        } catch (err) {
-            alert(t('저장에 실패했습니다.'))
+            alert(t('저장되었습니다.'))
+        } catch (err: any) {
+            console.error('SUBMIT_ERROR:', err)
+            const errorMsg = err.response?.data?.message || t('저장에 실패했습니다.')
+            alert(errorMsg)
+        } finally {
+            setSubmitting(false)
         }
     }
 
@@ -143,7 +150,13 @@ const ContentManagement = () => {
                                 </div>
                             </div>
                             <div className="flex gap-4 pt-6">
-                                <button type="submit" className="flex-grow py-5 premium-gradient rounded-full font-bold text-lg">{t('저장하기')}</button>
+                                <button 
+                                    type="submit" 
+                                    disabled={submitting}
+                                    className={`flex-grow py-5 premium-gradient rounded-full font-bold text-lg transition-opacity ${submitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    {submitting ? t('처리 중...') : t('저장하기')}
+                                </button>
                                 <button type="button" onClick={() => setIsFormOpen(false)} className="px-10 py-5 glass-effect rounded-full font-bold text-lg">{t('취소')}</button>
                             </div>
                         </form>

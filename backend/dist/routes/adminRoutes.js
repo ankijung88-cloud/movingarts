@@ -37,13 +37,22 @@ const express_1 = require("express");
 const adminController = __importStar(require("../controllers/adminController"));
 const auth_1 = require("../middleware/auth");
 const admin_1 = require("../middleware/admin");
+const upload_1 = require("../middleware/upload");
 const router = (0, express_1.Router)();
 // All routes here require both token and admin role
 router.use(auth_1.authenticateToken, admin_1.authenticateAdmin);
 router.get('/users', adminController.getUsers);
 router.get('/memberships', adminController.getMemberships);
 router.get('/contents', adminController.getContents);
-router.post('/contents', adminController.createContent);
-router.put('/contents/:id', adminController.updateContent);
+router.post('/contents', upload_1.upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'video', maxCount: 1 }
+]), adminController.createContent);
+router.put('/contents/:id', upload_1.upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'video', maxCount: 1 }
+]), adminController.updateContent);
 router.delete('/contents/:id', adminController.deleteContent);
+router.get('/membership-requests', adminController.getMembershipRequests);
+router.put('/membership-requests/:id/approve', adminController.approveMembershipRequest);
 exports.default = router;

@@ -12,4 +12,6 @@ router.post('/login', authController_1.login);
 router.get('/profile', auth_1.authenticateToken, authController_1.getProfile);
 router.post('/find-email', authController_1.findEmail);
 router.post('/reset-password-request', authController_1.resetPasswordRequest);
+router.post('/membership-request', auth_1.authenticateToken, authController_1.submitMembershipRequest);
+router.get('/membership-status', auth_1.authenticateToken, authController_1.getMembershipStatus);
 exports.default = router;

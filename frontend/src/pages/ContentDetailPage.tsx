@@ -106,6 +106,33 @@ const ContentDetailPage = () => {
                         {t(content.title)}
                     </h1>
 
+                    {(content.thumbnail_url || content.video_url) && (
+                        <div className="mb-16 space-y-8">
+                            {content.video_url ? (
+                                <div className="glass-effect p-4 rounded-[40px] border border-white/10 overflow-hidden shadow-2xl">
+                                    <video 
+                                        src={content.video_url} 
+                                        controls 
+                                        poster={content.thumbnail_url}
+                                        className="w-full rounded-[30px] shadow-inner"
+                                    >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            ) : (
+                                content.thumbnail_url && (
+                                    <div className="rounded-[40px] overflow-hidden border border-white/5 shadow-2xl">
+                                        <img 
+                                            src={content.thumbnail_url} 
+                                            alt={content.title} 
+                                            className="w-full h-auto object-cover"
+                                        />
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    )}
+
                     <div className="prose prose-invert max-w-none">
                         <p className="text-white/70 text-lg md:text-xl leading-[1.8] font-medium whitespace-pre-wrap font-medium">
                             {t(content.content)}
