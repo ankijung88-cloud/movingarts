@@ -17,7 +17,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'http://3.36.149.255:5000',
+                target: 'http://localhost:5000',
                 changeOrigin: true,
             },
         },
